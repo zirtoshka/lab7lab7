@@ -70,7 +70,7 @@ public class CommandManager {
         this.filterContainsNameCmd = new FilterContainsNameCommand();
         this.printFieldDescendingSemesterCmd = new PrintFieldDescendingSemesterCommand();
         this.printUniqueAdminCmd = new PrintUniqueGroupAdminCommand();
-        this.checkIdCmd=new CheckIdCommand();
+        this.checkIdCmd=new CheckIdCommand(this.user);
 
 
         this.helpCmd = new HelpCommand(infoCmd, showCmd, addCmd, updateByIdCmd, removeByIdCmd, clearCmd, executeScriptCmd, exitCmd,
@@ -248,7 +248,7 @@ public class CommandManager {
                 System.out.println(runCmd + updateByIdCmd.getName() + " " + id + " ...");
                 checkIdCmd.setId(id);
                 String res = client.run(checkIdCmd);
-                if (res.contains("The command could not be executed ((")){
+                if (res.contains("The command could not be executed ((")||res.contains("You can't update this study group because it's not yours")){
                     System.out.println(res);
                     break;
                 }

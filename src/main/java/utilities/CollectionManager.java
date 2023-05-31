@@ -6,9 +6,7 @@ import data.Semester;
 import data.StudyGroup;
 import data.Person;
 import data.User;
-import exceptions.DataBaseAuthorizationException;
-import exceptions.DatabaseHandlingException;
-import exceptions.NullCollectionException;
+import exceptions.*;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -188,10 +186,38 @@ public class CollectionManager {
         studyGroupCollection.remove(studyGroup);
     }
 
-    public void removeById(StudyGroup studyGroup, User user) {
-        idSet.remove(studyGroup.getId());
-        studyGroupCollection.remove(studyGroup);
-        //todo vehveh
+    public String removeById(Integer id, User user) {
+        try {
+            if (findById(id) == null) throw new StudyGroupNullException();
+            if(findById(id).getOwner().getUsername().equals(user.getUsername())){
+                try {
+                    dataBaseCollectionManager.removeStudyGroupById(id);
+                    sortCollection();
+                }catch (DatabaseHandlingException e){
+                    return "An error occurred when deleting an element";
+                }
+            }else throw new OtherOwnerException();
+        }catch (StudyGroupNullException e ){
+            return "No Study Group with that ID";
+        }catch (OtherOwnerException e){
+            return "It's not your group, so I can't delete it";
+        }return "The study group was removed";
+    }
+    public void sortCollection(){
+        if(!studyGroupCollection.isEmpty()){
+            List<StudyGroup> listForSort=new ArrayList<>(studyGroupCollection);
+            studyGroupCollection.clear();
+            Collections.sort(listForSort, new Comparator<StudyGroup>() {
+                @Override
+                public int compare(StudyGroup o1, StudyGroup o2) {
+                    return o1.getName().compareTo(o2.getName());
+                }
+            });
+            studyGroupCollection.addAll(listForSort);
+        }
+    }
+    public StudyGroup findById(int id){
+        return studyGroupCollection.stream().filter((studyGroup) -> studyGroup.getId().equals(id)).findAny().get();
     }
 
     public int getMaxNumberInGroup() {

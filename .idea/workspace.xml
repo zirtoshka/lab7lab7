@@ -4,30 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="aaaaa">
-      <change afterPath="$PROJECT_DIR$/src/database.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/DataBaseAuthorizationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/DatabaseHandlingException.java" afterDir="false" />
+    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="some cmd and log">
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/OtherOwnerException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CheckIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CheckIdCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIdCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/config/ConfigDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/ConfigDataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/StudyGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/StudyGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/AuthorizationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/AuthorizationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CommandManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseUserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseUserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/GeneratorRandomData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/GeneratorRandomData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/Module.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/PropHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/PropHelper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +123,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685531926888</updated>
-      <workItem from="1685531927924" duration="18128000" />
+      <workItem from="1685531927924" duration="21814000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1685532076876</created>
@@ -147,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685532076876</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="some cmd and log">
+      <created>1685563801799</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685563801799</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,6 +147,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="aaaaa" />
-    <option name="LAST_COMMIT_MESSAGE" value="aaaaa" />
+    <MESSAGE value="some cmd and log" />
+    <option name="LAST_COMMIT_MESSAGE" value="some cmd and log" />
   </component>
 </project>

@@ -29,18 +29,7 @@ public class RemoveByIdCommand extends Command {
 
     @Override
     public boolean execute() {
-        try {
-            if (collectionManager.collectionSize() == 0) throw new NullCollectionException();
-            StudyGroup studyGroup = collectionManager.getById(argId);
-            if (studyGroup == null) throw new StudyGroupNullException();
-            collectionManager.removeById(studyGroup, user);
-            Module.addMessage("Study group was removed");
-            return true;
-        } catch (NullCollectionException e) {
-            Module.addMessage("Collection is empty");
-        } catch (StudyGroupNullException e) {
-            Module.addMessage("No Study Group with that ID");
-        }
-        return false;
+        Module.addMessage(collectionManager.removeById(argId, user));
+        return true;
     }
 }

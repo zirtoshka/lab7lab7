@@ -35,6 +35,8 @@ public class ConfigDataBase {
             " WHERE " + USER_TABLE_USERNAME_COLUMN + " = ?";
     public static final String SELECT_USER_BY_USERNAME_AND_PASSWORD = SELECT_USER_BY_USERNAME + " AND " +
             USER_TABLE_PASSWORD_COLUMN + " = ?";
+    public static final String DELETE_MOVIE_BY_ID = "DELETE FROM " + STUDY_GROUP_TABLE +
+            " WHERE " + STUDY_GROUP_TABLE_ID_COLUMN + " = ?";
 
 
 
