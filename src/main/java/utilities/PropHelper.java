@@ -28,6 +28,7 @@ public class PropHelper {
 //            scanner=scan()
             fillFields(scanner);
         }catch (Exception e){
+            e.printStackTrace();
             throw new PropertiesException("Failed to read database connection parameters");
         }
         if (host == null || port == null || baseName == null || user == null || password == null)

@@ -96,7 +96,7 @@ public class ScannerManager {
                 askShouldBeExpelled(runScript, scriptScanner),
                 askAverageMark(runScript, scriptScanner),
                 askSemesterEnum(runScript, scriptScanner),
-                askPerson(runScript, scriptScanner));
+                askPerson(runScript, scriptScanner),null);
 
     }
 
@@ -490,7 +490,7 @@ public class ScannerManager {
             groupAdmin = askPerson(runScript, scriptScanner);
         }
         return new StudyGroup(wrongId, name, coordinates, creationDate, studentsCount,
-                shouldBeExpelled, averageMark, semesterEnum, groupAdmin);
+                shouldBeExpelled, averageMark, semesterEnum, groupAdmin,null);
 
     }
 

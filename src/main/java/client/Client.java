@@ -34,7 +34,10 @@ public class Client {
         datagramChannel=DatagramChannel.open();
         datagramChannel.configureBlocking(false);
         buffer = ByteBuffer.allocate(CAPACITY_BUFFER);
+        System.out.println(3);
         findServer();
+        System.out.println(4);
+
     }
 
     public String run(Object o1) {
@@ -78,8 +81,11 @@ public class Client {
 
     private void findServer() throws Disconnect {
         ConsoleManager.printInfoPurple( "Connecting to the server...");
+        System.out.println(1);
         String result = run(new Connect("connect", "Connecting to the server", user));
-        if (!(result.equals("Execution is successful\n"))) {
+        System.out.println(result);
+//        System.out.println(result.equals("Registration and authorization succeeded\nExecution is successful\n"));
+        if (!(result.equals("Registration and authorization succeeded\nExecution is successful\n")||result.equals("Authorization succeeded\nExecution is successful\n"))) {
             ConsoleManager.printInfoPurple(result);
             throw new Disconnect("No connection");
         }

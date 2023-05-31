@@ -16,6 +16,7 @@ public class App {
         } catch (PropertiesException e) {
             //todo exception
             throw new RuntimeException(e);
+
         }
     }
 }

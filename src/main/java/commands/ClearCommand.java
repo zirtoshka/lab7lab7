@@ -1,14 +1,17 @@
 package commands;
 
 
+import data.User;
 import utilities.CollectionManager;
 import utilities.Module;
 
 public class ClearCommand extends Command {
     private CollectionManager collectionManager;
+    private User user;
 
-    public ClearCommand() {
+    public ClearCommand(User user) {
         super("clear", "clear collection");
+        this.user=user;
 
     }
 
@@ -18,7 +21,7 @@ public class ClearCommand extends Command {
 
     @Override
     public boolean execute() {
-        collectionManager.clearCollection();
+        collectionManager.clearCollection(user);
         Module.addMessage("Collection is cleared");
         return true;
     }

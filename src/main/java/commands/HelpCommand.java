@@ -14,7 +14,7 @@ public class HelpCommand extends Command {
 
 
     public HelpCommand(InfoCommand infoCmd, ShowCommand showCmd, AddCommand addCmd, UpdateByIdCommand updateByIdCmd, RemoveByIdCommand removeByIdCmd, ClearCommand clearCmd,
-                       SaveCommand saveCmd, ExecuteScriptCommand executeScriptCmd, ExitCommand exitCmd, HeadCommand headCmd, AddIfMaxCommand addIfMaxCmd, HistoryCommand historyCmd,
+                        ExecuteScriptCommand executeScriptCmd, ExitCommand exitCmd, HeadCommand headCmd, AddIfMaxCommand addIfMaxCmd, HistoryCommand historyCmd,
                        FilterContainsNameCommand filterContainsNameCmd, PrintUniqueGroupAdminCommand printUniqueAdminCmd, PrintFieldDescendingSemesterCommand printFieldDescendingSemesterCmd) {
         super("help", "display help on available commands");
         commands.add(this);
@@ -24,7 +24,6 @@ public class HelpCommand extends Command {
         commands.add(updateByIdCmd);
         commands.add(removeByIdCmd);
         commands.add(clearCmd);
-        commands.add(saveCmd);
         commands.add(executeScriptCmd);
         commands.add(exitCmd);
         commands.add(addIfMaxCmd);

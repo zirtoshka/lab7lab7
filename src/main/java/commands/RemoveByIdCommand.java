@@ -2,6 +2,7 @@ package commands;
 
 
 import data.StudyGroup;
+import data.User;
 import exceptions.NullCollectionException;
 import exceptions.StudyGroupNullException;
 import utilities.CollectionManager;
@@ -10,9 +11,11 @@ import utilities.Module;
 public class RemoveByIdCommand extends Command {
     private CollectionManager collectionManager;
     private Integer argId;
+    private User user;
 
-    public RemoveByIdCommand() {
+    public RemoveByIdCommand(User user) {
         super("remove_by_id <id>", "remove element by id");
+        this.user=user;
 
     }
 
@@ -30,7 +33,7 @@ public class RemoveByIdCommand extends Command {
             if (collectionManager.collectionSize() == 0) throw new NullCollectionException();
             StudyGroup studyGroup = collectionManager.getById(argId);
             if (studyGroup == null) throw new StudyGroupNullException();
-            collectionManager.removeById(studyGroup);
+            collectionManager.removeById(studyGroup, user);
             Module.addMessage("Study group was removed");
             return true;
         } catch (NullCollectionException e) {

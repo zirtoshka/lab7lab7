@@ -16,4 +16,8 @@ public class DataBaseCollectionManager {
         ArrayDeque<StudyGroup> studyGroups=new ArrayDeque<>();
         return studyGroups;
     }
+
+    public DataBaseUserManager getDataBaseUserManager() {
+        return dataBaseUserManager;
+    }
 }

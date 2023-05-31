@@ -3,7 +3,7 @@ package config;
 public class ConfigDataBase {
     public static final String STUDY_GROUP_TABLE = "study_groups";
     public static final String GROUP_ADMIN_TABLE = "group_admins";
-    public static final String USER_TABLE="users";
+    public static final String USER_TABLE = "users";
     public static final String STUDY_GROUP_TABLE_ID_COLUMN = "id";
     public static final String STUDY_GROUP_TABLE_NAME_COLUMN = "name";
     public static final String STUDY_GROUP_TABLE_X_COLUMN = "coordinates_x";
@@ -21,8 +21,20 @@ public class ConfigDataBase {
     public static final String USER_TABLE_ID_COLUMN = "id";
     public static final String USER_TABLE_USERNAME_COLUMN = "username";
     public static final String USER_TABLE_PASSWORD_COLUMN = "password";
-    public static final String JDBC_DRIVER ="org.postgresql.Driver";
-
+    public static final String JDBC_DRIVER = "org.postgresql.Driver";
+    public static final String SELECT_ALL_FROM = "SELECT * FROM ";
+    public static final String WHERE = " WHERE ";
+    public static final int WRONG_ID = -1;
+    public static final String GET_USER_COUNT = "SELECT COUNT(1) FROM " + USER_TABLE;
+    public static final String INSERT_USER = "INSERT INTO " +
+            USER_TABLE + " (" +
+            USER_TABLE_ID_COLUMN + ", " +
+            USER_TABLE_USERNAME_COLUMN + ", " +
+            USER_TABLE_PASSWORD_COLUMN + ") VALUES (?, ?, ?)";
+    public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM " + USER_TABLE +
+            " WHERE " + USER_TABLE_USERNAME_COLUMN + " = ?";
+    public static final String SELECT_USER_BY_USERNAME_AND_PASSWORD = SELECT_USER_BY_USERNAME + " AND " +
+            USER_TABLE_PASSWORD_COLUMN + " = ?";
 
 
 

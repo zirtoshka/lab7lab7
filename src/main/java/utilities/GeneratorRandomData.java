@@ -121,7 +121,7 @@ public class GeneratorRandomData {
                 getRandomShouldBeExpelled(),
                 getRandomAverageMark(),
                 getRandomEnum(Semester.class),
-                generateRandomAdmin());
+                generateRandomAdmin(),null);
     }
 
 }

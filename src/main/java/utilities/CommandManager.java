@@ -36,7 +36,6 @@ public class CommandManager {
     private final UpdateByIdCommand updateByIdCmd;
     private final RemoveByIdCommand removeByIdCmd;
     private final ClearCommand clearCmd;
-    private final SaveCommand saveCmd;
     private final ExecuteScriptCommand executeScriptCmd;
     private final ExitCommand exitCmd;
     private final HeadCommand headCmd;
@@ -47,20 +46,21 @@ public class CommandManager {
     private final PrintFieldDescendingSemesterCommand printFieldDescendingSemesterCmd;
     private final HistoryWriter historyWriter;
     private final CheckIdCommand checkIdCmd;
+    private final User user;
 
 
     private final Client client;
 
     public CommandManager(Client client, User user) {
         this.client = client;
+        this.user=user;
 
         this.infoCmd = new InfoCommand();
         this.showCmd = new ShowCommand();
         this.addCmd = new AddCommand();
         this.updateByIdCmd = new UpdateByIdCommand();
-        this.removeByIdCmd = new RemoveByIdCommand();
-        this.clearCmd = new ClearCommand();
-        this.saveCmd = new SaveCommand();
+        this.removeByIdCmd = new RemoveByIdCommand(this.user);
+        this.clearCmd = new ClearCommand(this.user);
         this.executeScriptCmd = new ExecuteScriptCommand();
         this.exitCmd = new ExitCommand();
         this.addIfMaxCmd = new AddIfMaxCommand();
@@ -73,8 +73,8 @@ public class CommandManager {
         this.checkIdCmd=new CheckIdCommand();
 
 
-        this.helpCmd = new HelpCommand(infoCmd, showCmd, addCmd, updateByIdCmd, removeByIdCmd, clearCmd, saveCmd,
-                executeScriptCmd, exitCmd, headCmd, addIfMaxCmd, historyCmd, filterContainsNameCmd, printUniqueAdminCmd, printFieldDescendingSemesterCmd);
+        this.helpCmd = new HelpCommand(infoCmd, showCmd, addCmd, updateByIdCmd, removeByIdCmd, clearCmd, executeScriptCmd, exitCmd,
+                headCmd, addIfMaxCmd, historyCmd, filterContainsNameCmd, printUniqueAdminCmd, printFieldDescendingSemesterCmd);
         commands.add(helpCmd);
         commands.add(infoCmd);
         commands.add(showCmd);
@@ -82,7 +82,6 @@ public class CommandManager {
         commands.add(updateByIdCmd);
         commands.add(removeByIdCmd);
         commands.add(clearCmd);
-        commands.add(saveCmd);
         commands.add(executeScriptCmd);
         commands.add(exitCmd);
         commands.add(addIfMaxCmd);
@@ -115,6 +114,7 @@ public class CommandManager {
                     clientGroup=generateRandomGroup();
                 }else{
                  clientGroup= ScannerManager.askGroup(addCmd.getCollectionManager(),  runScript, scriptScanner);}
+                clientGroup.setOwner(user);
                 System.out.println(runCmd + addCmd.getName() + " ...");
                 addCmd.setArgGroup(clientGroup);
                 System.out.println(client.run(addCmd));
@@ -129,6 +129,7 @@ public class CommandManager {
             }
             case ADD_IF_MAX: {
                 StudyGroup clientGroup = ScannerManager.askGroup(addIfMaxCmd.getCollectionManager(), runScript, scriptScanner);
+                clientGroup.setOwner(user);
                 System.out.println(runCmd + addIfMaxCmd.getName() + " ...");
                 addIfMaxCmd.setArgGroup(clientGroup);
                 System.out.println(client.run(addIfMaxCmd));
@@ -184,7 +185,6 @@ public class CommandManager {
             }
             case EXIT: {
                 System.out.println(runCmd + exitCmd.getName() + " ...");
-                exitCmd.setSaveCommand(saveCmd);
                 System.out.println(client.run(exitCmd));
                 historyWriter.addInHistory(EXIT);
                 throw new ExitingException();

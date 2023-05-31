@@ -17,6 +17,7 @@ import static IO.ScannerManager.patternSymbols;
 
 
 public class StudyGroup implements Serializable, Comparable {
+
     private Integer id; //Поле не может быть null,
     // Значение поля должно быть больше 0,
     // Значение этого поля должно быть уникальным,
@@ -45,6 +46,7 @@ public class StudyGroup implements Serializable, Comparable {
     private final Semester defaultSemesterEnum = Semester.DEFAULT_SEMESTER;
     private Person groupAdmin; //Поле может быть null
     private Person defaultPerson = new Person();
+    private  User owner;
 
     public StudyGroup() throws IncorrectValuesForGroupException {
         try {
@@ -63,7 +65,7 @@ public class StudyGroup implements Serializable, Comparable {
 
     }
 
-    public StudyGroup(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, int studentsCount, Integer shouldBeExpelled, double averageMark, Semester semesterEnum, Person groupAdmin)  throws IncorrectValuesForGroupException{
+    public StudyGroup(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, int studentsCount, Integer shouldBeExpelled, double averageMark, Semester semesterEnum, Person groupAdmin, User owner)  throws IncorrectValuesForGroupException{
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -73,9 +75,16 @@ public class StudyGroup implements Serializable, Comparable {
         this.averageMark = averageMark;
         this.semesterEnum = semesterEnum;
         this.groupAdmin = groupAdmin;
+        this.owner=owner;
     }
 
+    public User getOwner() {
+        return owner;
+    }
 
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 
     public void setName(String name) {
         try {

@@ -5,9 +5,13 @@ import IO.ConsoleManager;
 import data.Semester;
 import data.StudyGroup;
 import data.Person;
+import data.User;
+import exceptions.DataBaseAuthorizationException;
+import exceptions.DatabaseHandlingException;
 import exceptions.NullCollectionException;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -134,18 +138,33 @@ public class CollectionManager {
                 "\n Last enter: " + lastInitTime;
     }
 
-    public void clearCollection() {
-        try {
-            if (studyGroupCollection == null) throw new NullCollectionException();
-            studyGroupCollection.clear();
-        } catch (NullCollectionException e) {
-        }
-
+    public String clearCollection(User user) {
+        ArrayDeque<StudyGroup> forRemove=new ArrayDeque<>();
+        studyGroupCollection.stream().filter((StudyGroup)->StudyGroup.getOwner().getUsername().equals(user.getUsername())).forEach(forRemove::add);
+        studyGroupCollection.removeAll(forRemove);
+        return "Number of deleted elements: "+forRemove.size();
     }
 
     public void saveCollection() {
 //        this.writeToFile();
         lastSaveTime = LocalDateTime.now();
+    }
+    public String auth(User user) throws DataBaseAuthorizationException{
+        DataBaseUserManager userManager= dataBaseCollectionManager.getDataBaseUserManager();
+        try {
+            if(user.isSignUp()){
+                try {
+                    userManager.getUserByUsername(user.getUsername());
+                    throw new DataBaseAuthorizationException("This login is already exists");
+                } catch (SQLException e) {
+                    userManager.insertUser(user);
+                    e.printStackTrace();
+                    return "Registration and authorization succeeded";
+                }
+            }else if(!userManager.checkUserByUsernamePassword(user)) throw new DatabaseHandlingException();
+        }catch (DatabaseHandlingException e){
+            throw new DataBaseAuthorizationException("Authorization declined");
+        }return "Authorization succeeded";
     }
 
     public String headOfCollection() {
@@ -169,9 +188,10 @@ public class CollectionManager {
         studyGroupCollection.remove(studyGroup);
     }
 
-    public void removeById(StudyGroup studyGroup) {
+    public void removeById(StudyGroup studyGroup, User user) {
         idSet.remove(studyGroup.getId());
         studyGroupCollection.remove(studyGroup);
+        //todo vehveh
     }
 
     public int getMaxNumberInGroup() {
