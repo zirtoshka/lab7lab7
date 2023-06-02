@@ -86,12 +86,12 @@ public class ScannerManager {
         return command;
     }
 
-    public static StudyGroup askGroup(CollectionManager collectionManager, boolean runScript, Scanner scriptScanner) throws IncorrectScriptException, IncorrectValuesForGroupException {
+    public static StudyGroup askGroup(boolean runScript, Scanner scriptScanner) throws IncorrectScriptException, IncorrectValuesForGroupException {
         return new StudyGroup(
                 wrongId,
                 askGroupName(runScript, scriptScanner),
                 askCoordinates(runScript, scriptScanner),
-                collectionManager.getLastInitTime().now(),
+                LocalDateTime.now(),
                 askStudentCount(runScript, scriptScanner),
                 askShouldBeExpelled(runScript, scriptScanner),
                 askAverageMark(runScript, scriptScanner),

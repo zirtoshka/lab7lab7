@@ -82,7 +82,7 @@ public class Client {
     private void findServer() throws Disconnect {
         ConsoleManager.printInfoPurple( "Connecting to the server...");
         System.out.println(1);
-        String result = run(new Connect("connect", "Connecting to the server", user));
+        String result = run(new Connect(user));
         System.out.println(result);
 //        System.out.println(result.equals("Registration and authorization succeeded\nExecution is successful\n"));
         if (!(result.equals("Registration and authorization succeeded\nExecution is successful\n")||result.equals("Authorization succeeded\nExecution is successful\n"))) {

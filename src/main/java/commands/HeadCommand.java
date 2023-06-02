@@ -8,7 +8,7 @@ public class HeadCommand extends Command {
     private CollectionManager collectionManager;
 
     public HeadCommand() {
-        super("head", "print the first element of the collection");
+        super("head", "print the first element of the collection",true);
 
     }
 

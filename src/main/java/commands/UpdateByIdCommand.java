@@ -1,23 +1,23 @@
 package commands;
 
 
-import IO.ScannerManager;
-import data.Coordinates;
 import data.Person;
-import data.Semester;
 import data.StudyGroup;
-import exceptions.*;
+import exceptions.IncorrectValuesForGroupException;
+import exceptions.NullCollectionException;
+import exceptions.StudyGroupNullException;
 import utilities.CollectionManager;
 import utilities.Module;
 
 
 public class UpdateByIdCommand extends Command {
+
     private CollectionManager collectionManager;
     private StudyGroup argGroup;
     private Integer id;
 
     public UpdateByIdCommand() {
-        super("update_by_id <id>", "update element by id");
+        super("update_by_id <id>", "update element by id",true);
 
     }
 

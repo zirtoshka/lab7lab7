@@ -7,7 +7,7 @@ public class SaveCommand extends Command {
     private CollectionManager collectionManager;
 
     public SaveCommand() {
-        super("save", "save to file, available only for server");
+        super("save", "save to file, available only for server",true);
     }
 
     public void setCollectionManager(CollectionManager collectionManager) {

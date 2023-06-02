@@ -5,13 +5,15 @@ import data.StudyGroup;
 import utilities.CollectionManager;
 import utilities.Module;
 
-public class AddCommand extends Command {
+public class AddCommand extends Command  {
     private CollectionManager collectionManager;
     private StudyGroup argGroup;
 
+
     public AddCommand() {
-        super("add", "add a new element to the collection");
+        super("add", "add a new element to the collection", true);
     }
+
 
     public void setCollectionManager(CollectionManager manager) {
         this.collectionManager = manager;
@@ -30,4 +32,6 @@ public class AddCommand extends Command {
         Module.addMessage(collectionManager.addToCollection(argGroup));
         return true;
     }
+
+
 }

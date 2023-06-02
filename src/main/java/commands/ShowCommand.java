@@ -12,7 +12,7 @@ public class ShowCommand extends Command {
     }
 
     public ShowCommand() {
-        super("show", "Show collection");
+        super("show", "Show collection",true);
     }
 
     @Override

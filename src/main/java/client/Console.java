@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Console {
 
-    public static void run(CommandManager commandManager) throws IncorrectValuesForGroupException, IncorrectScriptException {
+    public static void run(CommandManager commandManager) throws IncorrectValuesForGroupException, IncorrectScriptException, IOException {
         ConsoleManager.printInfoGreen("App is working, to get more information enter \"help\"" );
         String input;
         while (true) {

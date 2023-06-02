@@ -4,15 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="some cmd and log">
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/OtherOwnerException.java" afterDir="false" />
+    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="remove and update">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/CheckIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CheckIdCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterContainsNameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterContainsNameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HeadCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HeadCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HistoryCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HistoryCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintFieldDescendingSemesterCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintFieldDescendingSemesterCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintUniqueGroupAdminCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintUniqueGroupAdminCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIdCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/ConfigDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/ConfigDataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateByIdCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/Module.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +42,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -55,7 +75,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/zirtoshka/прога/lab7lab7",
+    "last_opened_file_path": "/Users/zirtoshka/прога/lab7lab7/src/main/java",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,6 +94,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
@@ -81,7 +102,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.client.App">
+  <component name="RunManager" selected="Application.client 2">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.App" />
       <module name="lab7lab7" />
@@ -95,7 +116,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="client.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="client 2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.App" />
+      <module name="lab7lab7" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="client.App" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.App" />
       <module name="lab7lab7" />
       <extension name="coverage">
@@ -108,6 +136,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.client 2" />
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.client.App" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.client.App" />
@@ -123,7 +156,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685531926888</updated>
-      <workItem from="1685531927924" duration="21814000" />
+      <workItem from="1685531927924" duration="22097000" />
+      <workItem from="1685614084319" duration="1881000" />
+      <workItem from="1685705148629" duration="23938000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1685532076876</created>
@@ -139,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685563801799</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="remove and update">
+      <created>1685569325317</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685569325317</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +190,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="aaaaa" />
     <MESSAGE value="some cmd and log" />
-    <option name="LAST_COMMIT_MESSAGE" value="some cmd and log" />
+    <MESSAGE value="remove and update" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove and update" />
   </component>
 </project>

@@ -1,16 +1,21 @@
 package commands;
 
+import utilities.CollectionManager;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class Command implements Serializable {
     private final String name;
+    private CollectionManager collectionManager;
     private final String description;
+    private final boolean isNeedCollectionManager;
 
-    public Command(String name, String description) {
+    public Command(String name, String description, boolean isNeedCollectionManager) {
         this.name = name;
         this.description = description;
+        this.isNeedCollectionManager=isNeedCollectionManager;
     }
 
     public abstract boolean execute() throws IOException;
@@ -18,6 +23,13 @@ public abstract class Command implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public boolean getIsNeedCollectionManager() {
+        return isNeedCollectionManager;
+    }
+    public void setCollectionManager(CollectionManager collectionManager){
+        this.collectionManager=collectionManager;
     }
 
     public String getDescription() {

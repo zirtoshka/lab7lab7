@@ -9,14 +9,18 @@ public class ClearCommand extends Command {
     private CollectionManager collectionManager;
     private User user;
 
-    public ClearCommand(User user) {
-        super("clear", "clear collection");
-        this.user=user;
+    public ClearCommand() {
+        super("clear", "clear collection",true);
+
 
     }
 
     public void setCollectionManager(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

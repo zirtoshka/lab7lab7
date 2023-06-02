@@ -1,10 +1,7 @@
 package commands;
 
 
-import data.StudyGroup;
 import data.User;
-import exceptions.NullCollectionException;
-import exceptions.StudyGroupNullException;
 import utilities.CollectionManager;
 import utilities.Module;
 
@@ -14,7 +11,7 @@ public class RemoveByIdCommand extends Command {
     private User user;
 
     public RemoveByIdCommand(User user) {
-        super("remove_by_id <id>", "remove element by id");
+        super("remove_by_id <id>", "remove element by id",true);
         this.user=user;
 
     }

@@ -1,6 +1,7 @@
 package utilities;
 
 
+import IO.ConsoleManager;
 import IO.ScannerManager;
 import client.Client;
 import commands.*;
@@ -10,10 +11,9 @@ import exceptions.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static config.ConfigData.*;
 import static data.StudyGroup.wrongId;
@@ -22,291 +22,216 @@ import static utilities.GeneratorRandomData.generateRandomGroup;
 public class CommandManager {
     private final String runCmd = "Running the command ";
 
-    public static final List<Command> commands = new LinkedList<>();
-
     private final List<String> script = new LinkedList<>();
     boolean runScript = false;
     Scanner scriptScanner = null;
     private final int NAME_CMD = 0;
     private final int ARG_CMD = 1;
-    private final HelpCommand helpCmd;
-    private final InfoCommand infoCmd;
-    private final ShowCommand showCmd;
-    private final AddCommand addCmd;
-    private final UpdateByIdCommand updateByIdCmd;
-    private final RemoveByIdCommand removeByIdCmd;
-    private final ClearCommand clearCmd;
-    private final ExecuteScriptCommand executeScriptCmd;
-    private final ExitCommand exitCmd;
-    private final HeadCommand headCmd;
-    private final AddIfMaxCommand addIfMaxCmd;
-    private final HistoryCommand historyCmd;
-    private final FilterContainsNameCommand filterContainsNameCmd;
-    private final PrintUniqueGroupAdminCommand printUniqueAdminCmd;
-    private final PrintFieldDescendingSemesterCommand printFieldDescendingSemesterCmd;
-    private final HistoryWriter historyWriter;
     private final CheckIdCommand checkIdCmd;
     private final User user;
-
+    private final HistoryWriter historyWriter;
+    private Map<String, Command> commandMap = new HashMap<>();
 
     private final Client client;
 
     public CommandManager(Client client, User user) {
         this.client = client;
-        this.user=user;
-
-        this.infoCmd = new InfoCommand();
-        this.showCmd = new ShowCommand();
-        this.addCmd = new AddCommand();
-        this.updateByIdCmd = new UpdateByIdCommand();
-        this.removeByIdCmd = new RemoveByIdCommand(this.user);
-        this.clearCmd = new ClearCommand(this.user);
-        this.executeScriptCmd = new ExecuteScriptCommand();
-        this.exitCmd = new ExitCommand();
-        this.addIfMaxCmd = new AddIfMaxCommand();
+        this.user = user;
         this.historyWriter = new HistoryWriter();
-        this.historyCmd = new HistoryCommand(historyWriter, NUMBER_OF_CMD);
-        this.headCmd = new HeadCommand();
-        this.filterContainsNameCmd = new FilterContainsNameCommand();
-        this.printFieldDescendingSemesterCmd = new PrintFieldDescendingSemesterCommand();
-        this.printUniqueAdminCmd = new PrintUniqueGroupAdminCommand();
-        this.checkIdCmd=new CheckIdCommand(this.user);
+        commandMap.put(INFO, new InfoCommand());
+        commandMap.put(ADD, new AddCommand());
+        commandMap.put(SHOW, new ShowCommand());
+        commandMap.put(ADD_IF_MAX, new AddIfMaxCommand());
+        commandMap.put(CLEAR, new ClearCommand());
+        commandMap.put(HEAD, new HeadCommand());
+        commandMap.put(EXECUTE_SCRIPT, new ExecuteScriptCommand());
+        commandMap.put(EXIT, new ExitCommand());
+        commandMap.put(FILTER_CONTAINS_NAME, new FilterContainsNameCommand());
+        commandMap.put(UPDATE_BY_ID, new UpdateByIdCommand());
+        commandMap.put(HEAD, new HeadCommand());
+        commandMap.put(HISTORY, new HistoryCommand(historyWriter, NUMBER_OF_CMD));
+        commandMap.put(PRINT_FIELD_DESCENDING_SEMESTER, new PrintFieldDescendingSemesterCommand());
+        commandMap.put(PRINT_UNIQUE_GROUP_ADMIN, new PrintUniqueGroupAdminCommand());
+        commandMap.put(SHOW, new ShowCommand());
 
 
-        this.helpCmd = new HelpCommand(infoCmd, showCmd, addCmd, updateByIdCmd, removeByIdCmd, clearCmd, executeScriptCmd, exitCmd,
-                headCmd, addIfMaxCmd, historyCmd, filterContainsNameCmd, printUniqueAdminCmd, printFieldDescendingSemesterCmd);
-        commands.add(helpCmd);
-        commands.add(infoCmd);
-        commands.add(showCmd);
-        commands.add(addCmd);
-        commands.add(updateByIdCmd);
-        commands.add(removeByIdCmd);
-        commands.add(clearCmd);
-        commands.add(executeScriptCmd);
-        commands.add(exitCmd);
-        commands.add(addIfMaxCmd);
-        commands.add(historyCmd);
-        commands.add(filterContainsNameCmd);
-        commands.add(printFieldDescendingSemesterCmd);
-        commands.add(printUniqueAdminCmd);
+        commandMap.put(REMOVE_BY_ID, new RemoveByIdCommand(user));
+        commandMap.put(HELP, new HelpCommand(commandMap.entrySet()
+                .stream()
+                .map(entry -> entry.getValue().getName() + ": " + entry.getValue().getDescription() + "\n")
+                .collect(Collectors.joining())));
+        this.checkIdCmd = new CheckIdCommand(user);
+        commandMap.put(CHECK_ID, checkIdCmd);
+
     }
 
+    private void runCmd(Command cmd) {
+        System.out.println(runCmd + cmd.getName() + " ...");
+        System.out.println(client.run(cmd));
+        historyWriter.addInHistory(cmd.getName());
+    }
 
+    private void validateAdd(AddCommand cmd) throws IncorrectScriptException, IncorrectValuesForGroupException {
+        StudyGroup clientGroup;
+        if (ScannerManager.askQuestion("Do you want to generate data for a new study group?", runScript, scriptScanner)) {
+            clientGroup = generateRandomGroup();
+        } else {
+            clientGroup = ScannerManager.askGroup(runScript, scriptScanner);
+        }
+        clientGroup.setOwner(user);
+        cmd.setArgGroup(clientGroup);
+    }
 
-    public void managerWork(String s) throws IncorrectScriptException, IncorrectValuesForGroupException, ExitingException{
+    private void validateAddIfMax(AddIfMaxCommand command) throws IncorrectScriptException, IncorrectValuesForGroupException {
+        StudyGroup clientGroup = ScannerManager.askGroup(runScript, scriptScanner);
+        clientGroup.setOwner(user);
+        command.setArgGroup(clientGroup);
+    }
+
+    private void validateRemoveById(RemoveByIdCommand removeByIdCommand, String[] data) {
+        LinkedList<String> toId = new LinkedList<String>();
+        int lengthData = data.length;
+        boolean successGetId = false;
+        Integer id = wrongId;
+        while (!successGetId) {
+            try {
+                if (lengthData == 1) {
+                    lengthData = 0;
+                    throw new ArgsException();
+                }
+                if (lengthData > 1) {
+                    toId.addLast(data[1]);
+                    lengthData = 0;
+                }
+
+                id = Integer.parseInt(toId.getLast());
+                if (!(id > 0)) {
+                    throw new NumberFormatException();
+                }
+                successGetId = true;
+            } catch (NumberFormatException e) {
+                System.out.println("It can't be id\nEnter id:");
+                toId.addLast(ScannerManager.askArgForCmd());
+            } catch (ArgsException e) {
+                System.out.println("what id is? why it is empty?\nEnter id:");
+                toId.addLast(ScannerManager.askArgForCmd());
+            }
+        }
+        removeByIdCommand.setArgId(id);
+    }
+
+    private void validateFilterContainsName(FilterContainsNameCommand command, String[] data) {
+        LinkedList<String> toName = new LinkedList<String>();
+        int lengthData = data.length;
+        boolean successGetName = false;
+        while (!successGetName) {
+            try {
+                if (lengthData == 1) {
+                    lengthData = 0;
+                    throw new ArgsException();
+                }
+                if (lengthData > 1) {
+                    toName.addLast(data[1]);
+                    lengthData = 0;
+                }
+                successGetName = true;
+            } catch (ArgsException e) {
+                System.out.println("What do I need to find??? why it is empty?\nEnter name:");
+                toName.addLast(ScannerManager.askArgForCmd());
+            }
+        }
+        command.setName(toName.getLast());
+    }
+
+    private void validateUpdateById(UpdateByIdCommand command, String[] data) {
+        LinkedList<String> toId = new LinkedList<String>();
+        int lengthData = data.length;
+        boolean successGetId = false;
+        Integer id = wrongId;
+        while (!successGetId) {
+            try {
+                if (lengthData == 1) {
+                    lengthData = 0;
+                    throw new ArgsException();
+                }
+                if (lengthData > 1) {
+                    toId.addLast(data[1]);
+                    lengthData = 0;
+                }
+
+                id = Integer.parseInt(toId.getLast());
+                if (!(id > 0)) {
+                    throw new NumberFormatException();
+                }
+                successGetId = true;
+            } catch (NumberFormatException e) {
+                System.out.println("It can't be id\nEnter id:");
+                toId.addLast(ScannerManager.askArgForCmd());
+            } catch (ArgsException e) {
+                System.out.println("what id is? why it is empty?\nEnter id:");
+                toId.addLast(ScannerManager.askArgForCmd());
+            }
+        }
+        command.setId(id);
+        checkIdCmd.setId(id);
+        String res = client.run(checkIdCmd);
+        if (res.contains("The command could not be executed ((") || res.contains("You can't update this study group because it's not yours")) {
+            System.out.println(res);
+        }
+        return;
+    }
+
+    //    StudyGroup clientGroup = ScannerManager.askQuestionForUpdate(runScript, scriptScanner);
+//            updateByIdCmd.setArgGroup(clientGroup);
+    private void validateScriprt(ExecuteScriptCommand command, String[] data) throws ExitingException, IOException {
+        LinkedList<String> toNameFile = new LinkedList<String>();
+        int lengthData = data.length;
+        boolean successGetFileName = false;
+        while (!successGetFileName) {
+            try {
+                if (lengthData == 1) {
+                    lengthData = 0;
+                    throw new ArgsException();
+                }
+                if (lengthData > 1) {
+                    toNameFile.addLast(data[1]);
+                    lengthData = 0;
+                }
+                successGetFileName = true;
+            } catch (ArgsException e) {
+                System.out.println("What do I need to execute??? why it is empty?\nEnter fileName:");
+                toNameFile.addLast(ScannerManager.askArgForCmd());
+            }
+        }
+        scriptMode(toNameFile.getLast());
+    }
+
+    public void managerWork(String s) throws IncorrectScriptException, IncorrectValuesForGroupException, ExitingException, IOException {
         String[] data = cmdParser(s);
-        switch (data[0]) {
-            case HELP: {
-                System.out.println(runCmd + helpCmd.getName() + " ...");
-                System.out.println(client.run(helpCmd));
-                historyWriter.addInHistory(HELP);
-                break;
+        Command cmd = commandMap.get(data[0]);
+        if (cmd != null) {
+            System.out.println(cmd.getName());
+            if (cmd.getName().equals(ADD_IF_MAX)) {
+                validateAddIfMax((AddIfMaxCommand) cmd);
+            } else if (cmd.getName().equals(ADD)) {
+                validateAdd((AddCommand) cmd);
+            } else if (cmd.getName().equals(REMOVE_BY_ID)) {
+                System.out.println(22222);
+                validateRemoveById((RemoveByIdCommand) cmd,data);
+            }else if(cmd.getName().equals(FILTER_CONTAINS_NAME)){
+                validateFilterContainsName((FilterContainsNameCommand) cmd,data);
+            } else if (cmd.getName().equals(UPDATE_BY_ID)) {
+                validateUpdateById((UpdateByIdCommand) cmd,data);
+            } else if (cmd.getName().equals(EXECUTE_SCRIPT)) {
+                validateScriprt((ExecuteScriptCommand) cmd,data);
             }
-            case INFO: {
-                System.out.println(runCmd + infoCmd.getName() + " ...");
-                System.out.println(client.run(infoCmd));
-                historyWriter.addInHistory(INFO);
-                break;
-            }
-            case ADD: {
-                StudyGroup clientGroup;
-                if (ScannerManager.askQuestion("Do you want to generate data for a new study group?", runScript,scriptScanner)){
-                    clientGroup=generateRandomGroup();
-                }else{
-                 clientGroup= ScannerManager.askGroup(addCmd.getCollectionManager(),  runScript, scriptScanner);}
-                clientGroup.setOwner(user);
-                System.out.println(runCmd + addCmd.getName() + " ...");
-                addCmd.setArgGroup(clientGroup);
-                System.out.println(client.run(addCmd));
-                historyWriter.addInHistory(ADD);
-                break;
-            }
-            case SHOW: {
-                System.out.println(runCmd + showCmd.getName() + " ...");
-                System.out.println(client.run(showCmd));
-                historyWriter.addInHistory(SHOW);
-                break;
-            }
-            case ADD_IF_MAX: {
-                StudyGroup clientGroup = ScannerManager.askGroup(addIfMaxCmd.getCollectionManager(), runScript, scriptScanner);
-                clientGroup.setOwner(user);
-                System.out.println(runCmd + addIfMaxCmd.getName() + " ...");
-                addIfMaxCmd.setArgGroup(clientGroup);
-                System.out.println(client.run(addIfMaxCmd));
-                historyWriter.addInHistory(ADD_IF_MAX);
-                break;
-            }
-            case CLEAR: {
-                System.out.println(runCmd + clearCmd.getName() + " ...");
-                System.out.println(client.run(clearCmd));
-                historyWriter.addInHistory(CLEAR);
-                break;
-            }
-            case HEAD: {
-                System.out.println(runCmd + headCmd.getName() + " ...");
-                System.out.println(client.run(headCmd));
-                historyWriter.addInHistory(HEAD);
-                break;
-            }
-            case REMOVE_BY_ID: {
-                LinkedList<String> toId = new LinkedList<String>();
-                int lengthData = data.length;
-                boolean successGetId = false;
-                Integer id = wrongId;
-                while (!successGetId) {
-                    try {
-                        if (lengthData == 1) {
-                            lengthData = 0;
-                            throw new ArgsException();
-                        }
-                        if (lengthData > 1) {
-                            toId.addLast(data[1]);
-                            lengthData = 0;
-                        }
-
-                        id = Integer.parseInt(toId.getLast());
-                        if (!(id > 0)) {
-                            throw new NumberFormatException();
-                        }
-                        successGetId = true;
-                    } catch (NumberFormatException e) {
-                        System.out.println("It can't be id\nEnter id:");
-                        toId.addLast(ScannerManager.askArgForCmd());
-                    } catch (ArgsException e) {
-                        System.out.println("what id is? why it is empty?\nEnter id:");
-                        toId.addLast(ScannerManager.askArgForCmd());
-                    }
-                }
-                System.out.println(runCmd + removeByIdCmd.getName() + " " + id + " ...");
-                removeByIdCmd.setArgId(id);
-                System.out.println(client.run(removeByIdCmd));
-                historyWriter.addInHistory(REMOVE_BY_ID);
-                break;
-            }
-            case EXIT: {
-                System.out.println(runCmd + exitCmd.getName() + " ...");
-                System.out.println(client.run(exitCmd));
-                historyWriter.addInHistory(EXIT);
-                throw new ExitingException();
-            }
-            case FILTER_CONTAINS_NAME: {
-                LinkedList<String> toName = new LinkedList<String>();
-                int lengthData = data.length;
-                boolean successGetName = false;
-                while (!successGetName) {
-                    try {
-                        if (lengthData == 1) {
-                            lengthData = 0;
-                            throw new ArgsException();
-                        }
-                        if (lengthData > 1) {
-                            toName.addLast(data[1]);
-                            lengthData = 0;
-                        }
-                        successGetName = true;
-                    } catch (ArgsException e) {
-                        System.out.println("What do I need to find??? why it is empty?\nEnter name:");
-                        toName.addLast(ScannerManager.askArgForCmd());
-                    }
-                }
-                System.out.println(runCmd + filterContainsNameCmd.getName() + " " + toName.getLast() + " ...");
-                filterContainsNameCmd.setName(toName.getLast());
-                System.out.println(client.run(filterContainsNameCmd));
-                historyWriter.addInHistory(FILTER_CONTAINS_NAME);
-                break;
-            }
-            case UPDATE_BY_ID: {
-                LinkedList<String> toId = new LinkedList<String>();
-                int lengthData = data.length;
-                boolean successGetId = false;
-                Integer id = wrongId;
-                while (!successGetId) {
-                    try {
-                        if (lengthData == 1) {
-                            lengthData = 0;
-                            throw new ArgsException();
-                        }
-                        if (lengthData > 1) {
-                            toId.addLast(data[1]);
-                            lengthData = 0;
-                        }
-
-                        id = Integer.parseInt(toId.getLast());
-                        if (!(id > 0)) {
-                            throw new NumberFormatException();
-                        }
-                        successGetId = true;
-                    } catch (NumberFormatException e) {
-                        System.out.println("It can't be id\nEnter id:");
-                        toId.addLast(ScannerManager.askArgForCmd());
-                    } catch (ArgsException e) {
-                        System.out.println("what id is? why it is empty?\nEnter id:");
-                        toId.addLast(ScannerManager.askArgForCmd());
-                    }
-                }
-                updateByIdCmd.setId(id);
-                System.out.println(runCmd + updateByIdCmd.getName() + " " + id + " ...");
-                checkIdCmd.setId(id);
-                String res = client.run(checkIdCmd);
-                if (res.contains("The command could not be executed ((")||res.contains("You can't update this study group because it's not yours")){
-                    System.out.println(res);
-                    break;
-                }
-                StudyGroup clientGroup = ScannerManager.askQuestionForUpdate(runScript, scriptScanner);
-                updateByIdCmd.setArgGroup(clientGroup);
-                System.out.println(client.run(updateByIdCmd));
-                historyWriter.addInHistory(UPDATE_BY_ID);
-                break;
-            }
-            case PRINT_FIELD_DESCENDING_SEMESTER: {
-                System.out.println(runCmd + printFieldDescendingSemesterCmd.getName() + " ...");
-                System.out.println(client.run(printFieldDescendingSemesterCmd));
-                historyWriter.addInHistory(PRINT_FIELD_DESCENDING_SEMESTER);
-                break;
-            }
-            case PRINT_UNIQUE_GROUP_ADMIN: {
-                System.out.println(runCmd + printUniqueAdminCmd.getName() + " ...");
-                System.out.println(client.run(printUniqueAdminCmd));
-                historyWriter.addInHistory(PRINT_UNIQUE_GROUP_ADMIN);
-                break;
-            }
-            case HISTORY: {
-                System.out.println(runCmd + historyCmd.getName() + " ...");
-                System.out.println(client.run(historyCmd));
-                historyWriter.addInHistory(HISTORY);
-                break;
-            }case EXECUTE_SCRIPT: {
-                LinkedList<String> toNameFile = new LinkedList<String>();
-                int lengthData = data.length;
-                boolean successGetFileName = false;
-                while (!successGetFileName) {
-                    try {
-                        if (lengthData == 1) {
-                            lengthData = 0;
-                            throw new ArgsException();
-                        }
-                        if (lengthData > 1) {
-                            toNameFile.addLast(data[1]);
-                            lengthData = 0;
-                        }
-                        successGetFileName = true;
-                    } catch (ArgsException e) {
-                        System.out.println("What do I need to execute??? why it is empty?\nEnter fileName:");
-                        toNameFile.addLast(ScannerManager.askArgForCmd());
-                    }
-                }
-                System.out.println(runCmd + executeScriptCmd.getName() +" "+toNameFile.getLast()+ " ...");
-                System.out.println(client.run(executeScriptCmd));
-                historyWriter.addInHistory(EXECUTE_SCRIPT);
-                scriptMode(toNameFile.getLast());
-                break;}
-            default:
-                System.out.println("I don't know this command");
-                break;
+            runCmd(cmd);
+        } else {
+            ConsoleManager.printError("I don't know this command");
         }
 
-    }
 
+    }
 
 
     public String[] cmdParser(String s) {
@@ -329,7 +254,7 @@ public class CommandManager {
         }
     }
 
-    public void scriptMode(String arg)  throws ExitingException{
+    public void scriptMode(String arg) throws ExitingException, IOException {
         String path;
         String[] userCmd = {"", ""};
         script.add(arg);
@@ -356,8 +281,8 @@ public class CommandManager {
                 }
 
 
-                managerWork(userCmd[NAME_CMD]+" "+userCmd[ARG_CMD]);
-                if (userCmd[NAME_CMD].equals(EXIT)){
+                managerWork(userCmd[NAME_CMD] + " " + userCmd[ARG_CMD]);
+                if (userCmd[NAME_CMD].equals(EXIT)) {
                     System.exit(1);
                 }
 
@@ -381,8 +306,9 @@ public class CommandManager {
         runScript = false;
         setScannerScript(null);
     }
-    private void setScannerScript(Scanner scanner){
-        this.scriptScanner =scanner;
+
+    private void setScannerScript(Scanner scanner) {
+        this.scriptScanner = scanner;
     }
 
 

@@ -1,19 +1,18 @@
 package commands;
 
-import IO.ConsoleManager;
 import data.User;
 import exceptions.DataBaseAuthorizationException;
 import utilities.CollectionManager;
 import utilities.Module;
 
 
-
-public class Connect extends Command {
+public class Connect extends Command  {
     private User user;
     private CollectionManager collectionManager;
-    public Connect(String name, String description, User user) {
-        super(name, description);
-        this.user=user;
+
+    public Connect(User user) {
+        super("connect", "Connecting to the server",true);
+        this.user = user;
     }
 
     public void setCollectionManager(CollectionManager collectionManager) {
@@ -21,11 +20,11 @@ public class Connect extends Command {
     }
 
     @Override
-    public boolean execute()  {
+    public boolean execute() {
         try {
             Module.addMessage(collectionManager.auth(user));
             return true;
-        }catch (DataBaseAuthorizationException e){
+        } catch (DataBaseAuthorizationException e) {
             Module.addMessage(e.getMessage());
             return false;
         }

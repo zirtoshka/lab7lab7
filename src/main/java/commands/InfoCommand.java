@@ -8,8 +8,9 @@ public class InfoCommand extends Command {
     private CollectionManager collectionManager;
 
     public InfoCommand() {
-        super("info", "print information about the collection");
+        super("info", "print information about the collection",true);
     }
+
 
     public void setCollectionManager(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
