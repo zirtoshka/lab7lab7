@@ -4,34 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="remove and update">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="map">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Console.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CheckIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CheckIdCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Connect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExitCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterContainsNameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterContainsNameCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HeadCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HeadCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HistoryCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HistoryCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintFieldDescendingSemesterCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintFieldDescendingSemesterCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintUniqueGroupAdminCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintUniqueGroupAdminCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIdCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateByIdCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/Module.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/ConfigDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/ConfigDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/StudyGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/StudyGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,29 +56,29 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/zirtoshka/прога/lab7lab7/src/main/java",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zirtoshka/прога/lab7lab7/src/main/java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
@@ -102,7 +89,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.client 2">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.App" />
       <module name="lab7lab7" />
@@ -143,8 +130,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.client.App" />
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.client.App" />
       </list>
     </recent_temporary>
   </component>
@@ -158,7 +145,8 @@
       <updated>1685531926888</updated>
       <workItem from="1685531927924" duration="22097000" />
       <workItem from="1685614084319" duration="1881000" />
-      <workItem from="1685705148629" duration="23938000" />
+      <workItem from="1685705148629" duration="23964000" />
+      <workItem from="1685777625842" duration="11376000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1685532076876</created>
@@ -181,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685569325317</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="map">
+      <created>1685744630843</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685744630843</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +186,7 @@
     <MESSAGE value="aaaaa" />
     <MESSAGE value="some cmd and log" />
     <MESSAGE value="remove and update" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove and update" />
+    <MESSAGE value="map" />
+    <option name="LAST_COMMIT_MESSAGE" value="map" />
   </component>
 </project>

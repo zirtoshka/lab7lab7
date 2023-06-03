@@ -34,9 +34,7 @@ public class Client {
         datagramChannel=DatagramChannel.open();
         datagramChannel.configureBlocking(false);
         buffer = ByteBuffer.allocate(CAPACITY_BUFFER);
-        System.out.println(3);
         findServer();
-        System.out.println(4);
 
     }
 
@@ -48,7 +46,6 @@ public class Client {
             out = (String) getObject();
             close();
         } catch (IOException  e) {
-            System.out.println(e);
             return "ohh(( No connection with the server";
         }
         return out;
@@ -66,7 +63,6 @@ public class Client {
     private Object getObject()  {
         while (true) {
             try {
-
                 client.read(buffer);
                 Object o = deserializer.deserialize(buffer);
                 buffer = ByteBuffer.allocate(CAPACITY_BUFFER);
@@ -84,7 +80,6 @@ public class Client {
         System.out.println(1);
         String result = run(new Connect(user));
         System.out.println(result);
-//        System.out.println(result.equals("Registration and authorization succeeded\nExecution is successful\n"));
         if (!(result.equals("Registration and authorization succeeded\nExecution is successful\n")||result.equals("Authorization succeeded\nExecution is successful\n"))) {
             ConsoleManager.printInfoPurple(result);
             throw new Disconnect("No connection");

@@ -34,6 +34,7 @@ public class CollectionManager {
         this.lastInitTime = null;
         this.lastSaveTime = null;
         this.dataBaseCollectionManager = dataBaseCollectionManager;
+        loadCollection();
     }
 
     public void createCollection() {
@@ -60,6 +61,7 @@ public class CollectionManager {
         lastInitTime = LocalDateTime.now();
         return "StudyGroup added successfully";
     }
+
 
     public String addToCollectionIfMax(StudyGroup studyGroupFromUser) {
         if (studyGroupFromUser.getStudentsCount() > getMaxNumberInGroup()) {
@@ -124,6 +126,7 @@ public class CollectionManager {
     }
 
     public void loadCollection() {
+        studyGroupCollection=dataBaseCollectionManager.getCollection();
         studyGroupCollection = dataBaseCollectionManager.getCollection();
 
     }

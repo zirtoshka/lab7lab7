@@ -17,7 +17,7 @@ public class UpdateByIdCommand extends Command {
     private Integer id;
 
     public UpdateByIdCommand() {
-        super("update_by_id <id>", "update element by id",true);
+        super("update_by_id", "update element by id",true);
 
     }
 
@@ -81,8 +81,6 @@ public class UpdateByIdCommand extends Command {
             return false;
         } catch (StudyGroupNullException e) {
             Module.addMessage("No such Study Group with that ID");
-            return false;
-        } catch (IncorrectValuesForGroupException e) {
             return false;
         }
     }

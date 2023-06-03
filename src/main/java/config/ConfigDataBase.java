@@ -2,7 +2,7 @@ package config;
 
 public class ConfigDataBase {
     public static final String STUDY_GROUP_TABLE = "study_groups";
-    public static final String GROUP_ADMIN_TABLE = "group_admins";
+    public static final String GROUP_ADMIN_TABLE = "person";
     public static final String USER_TABLE = "users";
     public static final String STUDY_GROUP_TABLE_ID_COLUMN = "id";
     public static final String STUDY_GROUP_TABLE_NAME_COLUMN = "name";
@@ -13,8 +13,11 @@ public class ConfigDataBase {
     public static final String STUDY_GROUP_TABLE_SHOULD_BE_EXPELLED_COLUMN = "should_be_expelled";
     public static final String STUDY_GROUP_TABLE_AVERAGE_MARK_COLUMN = "average_mark";
     public static final String STUDY_GROUP_TABLE_SEMESTER_COLUMN = "semester";
+    public static final String STUDY_GROUP_TABLE_OWNER_LOGIN_COLUMN = "owner_login";
+
     public static final String GROUP_ADMIN_TABLE_ID_GROUP_COLUMN = "group_id";
     public static final String GROUP_ADMIN_TABLE_NAME_COLUMN = "name";
+    public static final String GROUP_ADMIN_TABLE_BIRTHDAY_COLUMN="birthday";
     public static final String GROUP_ADMIN_TABLE_EYE_COLOR_COLUMN = "eye_color";
     public static final String GROUP_ADMIN_TABLE_HAIR_COLOR_COLUMN = "hair_color";
     public static final String GROUP_ADMIN_TABLE_NATIONALITY_COLUMN = "nationality";
@@ -37,7 +40,33 @@ public class ConfigDataBase {
             USER_TABLE_PASSWORD_COLUMN + " = ?";
     public static final String DELETE_MOVIE_BY_ID = "DELETE FROM " + STUDY_GROUP_TABLE +
             " WHERE " + STUDY_GROUP_TABLE_ID_COLUMN + " = ?";
-
+    public static final String SELECT_ALL_STUDY_GROUPS= "SELECT * FROM "+ STUDY_GROUP_TABLE+" , "+GROUP_ADMIN_TABLE+
+            " FROM "+"JOIN "+STUDY_GROUP_TABLE+" ON "+ STUDY_GROUP_TABLE+"."+STUDY_GROUP_TABLE_ID_COLUMN+" = "+GROUP_ADMIN_TABLE+"."+STUDY_GROUP_TABLE_ID_COLUMN+
+            " JOIN "+STUDY_GROUP_TABLE+" ON "+ STUDY_GROUP_TABLE+"."+ STUDY_GROUP_TABLE_OWNER_LOGIN_COLUMN +" = "+USER_TABLE+"."+USER_TABLE_ID_COLUMN;
+    public static final String INSERT_STUDY_GROUP = "INSERT INTO " +
+            STUDY_GROUP_TABLE + " (" +
+            STUDY_GROUP_TABLE_ID_COLUMN + ", " +
+            STUDY_GROUP_TABLE_NAME_COLUMN + ", " +
+            STUDY_GROUP_TABLE_X_COLUMN + ", " +
+            STUDY_GROUP_TABLE_Y_COLUMN + ", " +
+            STUDY_GROUP_TABLE_CREATION_DATE_COLUMN + ", " +
+            STUDY_GROUP_TABLE_STUDENT_COUNT_COLUMN + ", " +
+            STUDY_GROUP_TABLE_SHOULD_BE_EXPELLED_COLUMN + ", " +
+            STUDY_GROUP_TABLE_AVERAGE_MARK_COLUMN + ", " +
+            STUDY_GROUP_TABLE_SEMESTER_COLUMN + ", " +
+            STUDY_GROUP_TABLE_OWNER_LOGIN_COLUMN +
+            ") VALUES (" +
+            "?, ?, ?, ?, ?, " +
+            "?, ?, ?, ?, ?)";
+    public static final String INSERT_GROUP_ADMIN = "INSERT INTO " +
+            GROUP_ADMIN_TABLE + " (" +
+            GROUP_ADMIN_TABLE_ID_GROUP_COLUMN + ", " +
+            GROUP_ADMIN_TABLE_BIRTHDAY_COLUMN + ", " +
+            GROUP_ADMIN_TABLE_EYE_COLOR_COLUMN + ", " +
+            GROUP_ADMIN_TABLE_HAIR_COLOR_COLUMN + ", " +
+            GROUP_ADMIN_TABLE_NATIONALITY_COLUMN +
+            ") VALUES (" +
+            "?, ?, ?, ?, ?)";
 
 
 }

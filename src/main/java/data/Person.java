@@ -24,7 +24,7 @@ public class Person implements Serializable {
     private final ColorHair defaultHairColor = ColorHair.DEFAULT_COLOR;
     private Country nationality; //Поле может быть null
     private final Country defaultCountry = Country.DEFAULT_COUNTRY;
-    public Person() throws IncorrectValuesForGroupException {
+    public Person() {
         this.setName(defaultName);
         this.setBirthday(defaultBirthday);
         this.setEyeColor(defaultEyeColor);
@@ -41,7 +41,7 @@ public class Person implements Serializable {
         this.nationality = nationality;
     }
 
-    public void setName(String name) throws IncorrectValuesForGroupException {
+    public void setName(String name)  {
 
         try {
             if (name == null || name.isEmpty()) throw new NotNullException();
@@ -49,10 +49,9 @@ public class Person implements Serializable {
             this.name = name;
         } catch (NotNullException e) {
             ConsoleManager.printError("Name admin can't be empty, so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
+
         } catch (WrongNameException e) {
             ConsoleManager.printError("I can parse only char symbol! (letters, numbers and '_'), so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
         }
     }
 
@@ -68,16 +67,14 @@ public class Person implements Serializable {
         return birthday;
     }
 
-    public void setEyeColor(ColorEye eyeColor) throws IncorrectValuesForGroupException{
+    public void setEyeColor(ColorEye eyeColor){
         try {
             if (eyeColor == null) throw new NotNullException();
             this.eyeColor = eyeColor;
         } catch (NotNullException e) {
             ConsoleManager.printError("Eye color can't be empty, so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
         } catch (IllegalArgumentException e) {
             ConsoleManager.printError("Hmm.. I don't know this eye color, so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
         }
     }
 
@@ -85,7 +82,7 @@ public class Person implements Serializable {
         return eyeColor;
     }
 
-    public void setHairColor(ColorHair hairColor) throws IncorrectValuesForGroupException{
+    public void setHairColor(ColorHair hairColor) {
         try {
             if (hairColor == null) {
                 this.hairColor = null;
@@ -94,7 +91,6 @@ public class Person implements Serializable {
             this.hairColor = hairColor;
         } catch (IllegalArgumentException e) {
             ConsoleManager.printError("Hmm.. I don't know this hair color, so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
         }
     }
 
@@ -102,7 +98,7 @@ public class Person implements Serializable {
         return hairColor;
     }
 
-    public void setNationality(Country nationality) throws IncorrectValuesForGroupException {
+    public void setNationality(Country nationality)  {
         try {
             if (nationality == null) {
                 this.nationality = null;
@@ -111,7 +107,6 @@ public class Person implements Serializable {
             this.nationality = nationality;
         } catch (IllegalArgumentException e) {
             ConsoleManager.printError("Hmm.. I don't know this country, so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
         }
     }
 

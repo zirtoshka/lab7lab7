@@ -16,17 +16,17 @@ public class Coordinates implements Serializable {
     private final Double defaultX = 0D;
     private final Float defaultY = 0F;
 
-    public Coordinates() throws IncorrectValuesForGroupException {
+    public Coordinates()  {
         this.setX(defaultX);
         this.setY(defaultY);
     }
 
-    public Coordinates(Double x, Float y) throws IncorrectValuesForGroupException {
+    public Coordinates(Double x, Float y) {
         this.setX(x);
         this.setY(y);
     }
 
-    public void setX(Double coordinatesX) throws IncorrectValuesForGroupException {
+    public void setX(Double coordinatesX)  {
         try {
             if (coordinatesX == null) throw new NotNullException();
             if (coordinatesX > MAX_X) throw new IncorrectValueException();
@@ -34,10 +34,8 @@ public class Coordinates implements Serializable {
         } catch (IncorrectValueException e) {
             ConsoleManager.printError("This value (x) has to be less than " + MAX_X+", so I can't add the group in collection");
             this.coordinatesX=defaultX;
-            throw new IncorrectValuesForGroupException();
         } catch (NotNullException e) {
             ConsoleManager.printError("X can't be null, so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
         }
     }
 
@@ -45,17 +43,15 @@ public class Coordinates implements Serializable {
         return coordinatesX;
     }
 
-    public void setY(Float coordinatesY) throws IncorrectValuesForGroupException{
+    public void setY(Float coordinatesY) {
         try {
             if (coordinatesY == null) throw new NotNullException();
             if (coordinatesY < MIN_Y) throw new IncorrectValueException();
             this.coordinatesY = coordinatesY;
         } catch (IncorrectValueException e) {
             ConsoleManager.printError("This value (y) has to be more than " + MIN_Y+", so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
         } catch (NotNullException e) {
             ConsoleManager.printError("Y can't be null, so I can't add the group in collection");
-            throw new IncorrectValuesForGroupException();
         }
     }
 

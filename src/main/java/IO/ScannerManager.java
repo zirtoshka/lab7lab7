@@ -86,7 +86,7 @@ public class ScannerManager {
         return command;
     }
 
-    public static StudyGroup askGroup(boolean runScript, Scanner scriptScanner) throws IncorrectScriptException, IncorrectValuesForGroupException {
+    public static StudyGroup askGroup(boolean runScript, Scanner scriptScanner) throws IncorrectScriptException {
         return new StudyGroup(
                 wrongId,
                 askGroupName(runScript, scriptScanner),
@@ -236,17 +236,13 @@ public class ScannerManager {
     }
 
     public static Coordinates askCoordinates(boolean runScript, Scanner scriptScanner) throws IncorrectScriptException {
-        try {
             Double x = askCoordinatesX(runScript, scriptScanner);
             Float y = askCoordinatesY(runScript, scriptScanner);
             Coordinates userCoordinates = new Coordinates();
             userCoordinates.setX(x);
             userCoordinates.setY(y);
             return userCoordinates;
-        } catch (IncorrectValuesForGroupException e) {
-            ConsoleManager.printError(e);
-            return null;
-        }
+
     }
 
     public static int askStudentCount(boolean runScript, Scanner scriptScanner) throws IncorrectScriptException, NumberFormatException {

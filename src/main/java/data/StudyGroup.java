@@ -48,8 +48,8 @@ public class StudyGroup implements Serializable, Comparable {
     private Person defaultPerson = new Person();
     private  User owner;
 
-    public StudyGroup() throws IncorrectValuesForGroupException {
-        try {
+    public StudyGroup() {
+
             this.setId(defaultId);
             this.setName(defaultName);
             this.setCoordinates(defaultCoordinates);
@@ -59,13 +59,11 @@ public class StudyGroup implements Serializable, Comparable {
             this.setAverageMark(DEFAULT_AVERAGE_MARK);
             this.setSemesterEnum(defaultSemesterEnum);
             this.setGroupAdmin(defaultPerson);
-        } catch (IncorrectValuesForGroupException e){
-            this.id=wrongId;
-        }
+
 
     }
 
-    public StudyGroup(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, int studentsCount, Integer shouldBeExpelled, double averageMark, Semester semesterEnum, Person groupAdmin, User owner)  throws IncorrectValuesForGroupException{
+    public StudyGroup(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, int studentsCount, Integer shouldBeExpelled, double averageMark, Semester semesterEnum, Person groupAdmin, User owner)  {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -110,16 +108,12 @@ public class StudyGroup implements Serializable, Comparable {
     public void setId(Integer id) {
         try {
             if (id == null) throw new NotNullException();
-            if (id <= 0) throw new IncorrectValueException();
+
             this.id = id;
         } catch (NotNullException e) {
             ConsoleManager.printError("ID can't be null, so I can't add the group in collection");
             this.id=wrongId;
-        } catch (IncorrectValueException e) {
-            ConsoleManager.printError("ID has incorrect value, so I can't add the group in collection");
-           this.id=wrongId;
         }
-
     }
 
     public Integer getId() {
@@ -144,7 +138,7 @@ public class StudyGroup implements Serializable, Comparable {
         return averageMark;
     }
 
-    public void setCoordinates(Coordinates coordinates) throws IncorrectValuesForGroupException{
+    public void setCoordinates(Coordinates coordinates) {
         this.coordinates = new Coordinates();
         this.coordinates.setX(coordinates.getCoordinatesX());
         this.coordinates.setY(coordinates.getCoordinatesY());
@@ -155,13 +149,9 @@ public class StudyGroup implements Serializable, Comparable {
     }
 
     public void setCreationDate(LocalDateTime creationDate) {
-        try {
+
             this.creationDate = creationDate;
-        } catch (RuntimeException e){
-            System.out.println(e);
-            this.creationDate=defaultCreationDate;
-            this.id=wrongId;
-        }
+
 
     }
 
