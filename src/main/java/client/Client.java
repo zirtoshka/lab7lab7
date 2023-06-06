@@ -67,7 +67,7 @@ public class Client {
                 Object o = deserializer.deserialize(buffer);
                 buffer = ByteBuffer.allocate(CAPACITY_BUFFER);
                 return o;
-        }catch (IOException | ClassNotFoundException e){
+        } catch (IOException | ClassNotFoundException ignored){
             }
     }}
 
@@ -77,7 +77,6 @@ public class Client {
 
     private void findServer() throws Disconnect {
         ConsoleManager.printInfoPurple( "Connecting to the server...");
-        System.out.println(1);
         String result = run(new Connect(user));
         System.out.println(result);
         if (!(result.equals("Registration and authorization succeeded\nExecution is successful\n")||result.equals("Authorization succeeded\nExecution is successful\n"))) {

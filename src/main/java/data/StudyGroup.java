@@ -120,6 +120,7 @@ public class StudyGroup implements Serializable, Comparable {
         return id;
     }
 
+
     public void setAverageMark(double averageMark) {
         try {
             if (averageMark <= 0) throw new IncorrectValueException();

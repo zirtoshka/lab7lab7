@@ -52,11 +52,11 @@ public class GeneratorRandomData {
     }
 
 
-    private static Date generateRandomDate() {
+    private static java.sql.Date generateRandomDate() {
         long startTimestamp = TimeUnit.SECONDS.toMillis(0);
         long endTimestamp = TimeUnit.SECONDS.toMillis(System.currentTimeMillis());
         long randomTimestamp = ThreadLocalRandom.current().nextLong(startTimestamp, endTimestamp);
-        return new Date(randomTimestamp);
+        return new java.sql.Date(randomTimestamp);
     }
 
     private static int getRandomStudentsCount() {

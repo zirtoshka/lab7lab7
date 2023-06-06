@@ -54,12 +54,16 @@ public class CollectionManager {
     }
 
     public String addToCollection(StudyGroup studyGroupFromUser) {
-        if (studyGroupFromUser.getId().equals(wrongId)) {
+        if (studyGroupFromUser.getId().equals(wrongId) || idSet.add(studyGroupFromUser.getId())) {
             studyGroupFromUser.setId(generateId());
         }
-        studyGroupCollection.add(studyGroupFromUser);
-        lastInitTime = LocalDateTime.now();
-        return "StudyGroup added successfully";
+        try {
+            studyGroupCollection.add(dataBaseCollectionManager.insertStudyGroup(studyGroupFromUser));
+            lastInitTime = LocalDateTime.now();
+            return "StudyGroup added successfully";
+        }catch (DatabaseHandlingException e){
+            return "failed to add the group";
+        }
     }
 
 
@@ -126,9 +130,11 @@ public class CollectionManager {
     }
 
     public void loadCollection() {
-        studyGroupCollection=dataBaseCollectionManager.getCollection();
-        studyGroupCollection = dataBaseCollectionManager.getCollection();
+        studyGroupCollection=dataBaseCollectionManager.getCollection(this);
 
+    }
+    public void updateIdSet(Integer groupId){
+        idSet.add(groupId);
     }
 
     public String printInfo() {

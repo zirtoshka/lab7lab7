@@ -4,21 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="map">
+    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="db">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterContainsNameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterContainsNameCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIdCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateByIdCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/config/ConfigDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/ConfigDataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/data/StudyGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/StudyGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/AuthorizationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/AuthorizationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseUserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseUserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/GeneratorRandomData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/GeneratorRandomData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +142,9 @@
       <workItem from="1685531927924" duration="22097000" />
       <workItem from="1685614084319" duration="1881000" />
       <workItem from="1685705148629" duration="23964000" />
-      <workItem from="1685777625842" duration="11376000" />
+      <workItem from="1685777625842" duration="15758000" />
+      <workItem from="1685804307392" duration="14199000" />
+      <workItem from="1686062277257" duration="5030000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1685532076876</created>
@@ -176,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685744630843</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="db">
+      <created>1685798542990</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685798542990</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +192,7 @@
     <MESSAGE value="some cmd and log" />
     <MESSAGE value="remove and update" />
     <MESSAGE value="map" />
-    <option name="LAST_COMMIT_MESSAGE" value="map" />
+    <MESSAGE value="db" />
+    <option name="LAST_COMMIT_MESSAGE" value="db" />
   </component>
 </project>

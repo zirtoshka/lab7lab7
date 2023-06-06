@@ -1,5 +1,6 @@
 package utilities;
 
+import IO.ConsoleManager;
 import data.User;
 import exceptions.DatabaseHandlingException;
 
@@ -33,11 +34,12 @@ public class DataBaseUserManager {
                         false);
 
             } else {
-                System.out.println(2);
-                throw new SQLException();}
+                throw new SQLException();
+            }
             }catch(SQLException e){
-                e.printStackTrace();
+            e.printStackTrace();
                 throw new SQLException(e);
+
             }finally{
                 dataBaseHandler.closePreparedStatement(preparedStatement);
             }
@@ -97,7 +99,9 @@ public class DataBaseUserManager {
                 preparedStatement.setInt(1, id);
                 preparedStatement.setString(2, user.getUsername());
                 preparedStatement.setString(3, user.getPassword());
-                if (preparedStatement.executeUpdate() == 0) throw new SQLException();
+                if (preparedStatement.executeUpdate() == 0) {
+                    throw new SQLException();
+                }
                 return true;
             } catch (SQLException e) {
                 throw new DatabaseHandlingException();

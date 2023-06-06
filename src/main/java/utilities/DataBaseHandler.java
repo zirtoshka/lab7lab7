@@ -16,6 +16,7 @@ public class DataBaseHandler {
         this.password = password;
         connectToBataBase();
     }
+
     public void setCommitMode() {
         try {
             if (connection == null) throw new SQLException();
@@ -24,6 +25,7 @@ public class DataBaseHandler {
             System.out.println("Произошла ошибка при установлении режима транзакции базы данных!");
         }
     }
+
     public void setNormalMode() {
         try {
             if (connection == null) throw new SQLException();
@@ -32,13 +34,16 @@ public class DataBaseHandler {
             System.out.println("Произошла ошибка при установлении нормального режима базы данных!");
         }
     }
+
     public void commit() {
         try {
             if (connection == null) throw new SQLException();
             connection.commit();
         } catch (SQLException exception) {
             System.out.println("Произошла ошибка при подтверждении нового состояния базы данных!");
-        }}
+        }
+    }
+
     public void setSavepoint() {
         try {
             if (connection == null) throw new SQLException();
@@ -47,6 +52,7 @@ public class DataBaseHandler {
             System.out.println("Произошла ошибка при сохранении состояния базы данных!");
         }
     }
+
     private void connectToBataBase() {
         try {
             Class.forName("org.postgresql.Driver");
@@ -76,5 +82,13 @@ public class DataBaseHandler {
         }
     }
 
+    public void rollback() {
+        try {
+            if (connection == null) throw new SQLException();
+            connection.rollback();
+        } catch (SQLException exception) {
+            System.out.println("Произошла ошибка при возврате исходного состояния базы данных!");
+        }
+    }
 
 }
