@@ -25,7 +25,6 @@ public class PropHelper {
             } else {
                 scanner = scan(System.getProperty("user.dir") + "/" + "src/database.properties");
             }
-//            scanner=scan()
             fillFields(scanner);
         }catch (Exception e){
             e.printStackTrace();

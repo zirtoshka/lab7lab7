@@ -6,12 +6,12 @@ import utilities.CollectionManager;
 import utilities.Module;
 
 
-public class Connect extends Command  {
+public class Connect extends Command {
     private User user;
     private CollectionManager collectionManager;
 
     public Connect(User user) {
-        super("connect", "Connecting to the server",true);
+        super("connect", "Connecting to the server", true);
         this.user = user;
     }
 

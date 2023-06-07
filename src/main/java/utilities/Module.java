@@ -18,7 +18,7 @@ public class Module {
         Scanner scanner = new Scanner(currentCmd);
         scanner.useDelimiter("\\s");
         currentCmd = scanner.next();
-        if(command.getIsNeedCollectionManager()){
+        if (command.getIsNeedCollectionManager()) {
             command.setCollectionManager(collectionManager);
         }
         return command.execute();
@@ -36,16 +36,6 @@ public class Module {
 
     public static void setCollectionManager(CollectionManager collectionManager) {
         Module.collectionManager = collectionManager;
-    }
-
-
-    public static void setCommandManager(CommandManager commandManager) {
-        Module.commandManager = commandManager;
-        System.out.println("Command manager is set" + commandManager);
-    }
-
-    public static CommandManager getCommandManager() {
-        return commandManager;
     }
 
     public static CollectionManager getCollectionManager() {

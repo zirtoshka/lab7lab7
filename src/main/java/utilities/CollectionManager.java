@@ -27,18 +27,12 @@ public class CollectionManager {
     private final String emptyCollection = "Collection is empty";
 
     private static LocalDateTime lastInitTime;
-    private LocalDateTime lastSaveTime;
 
 
     public CollectionManager(DataBaseCollectionManager dataBaseCollectionManager) {
         this.lastInitTime = null;
-        this.lastSaveTime = null;
         this.dataBaseCollectionManager = dataBaseCollectionManager;
         loadCollection();
-    }
-
-    public void createCollection() {
-        this.studyGroupCollection = new ArrayDeque<StudyGroup>();
     }
 
 
@@ -68,13 +62,6 @@ public class CollectionManager {
 
     public String updateById(StudyGroup studyGroup) {
         try {
-////            studyGroupCollection.stream().filter((StudyGroup) -> StudyGroup.getOwner().getUsername().equals(user.getUsername())).forEach(forRemove::add);
-////            studyGroupCollection.removeAll(forRemove);
-//        } catch (NullPointerException e) {
-//            return "What do you want to clear? You didn't add any study groups";
-//        }
-//
-//        return "Number of deleted elements: " + forRemove.size();
             dataBaseCollectionManager.removeStudyGroupById(studyGroup.getId());
             studyGroupCollection.add(dataBaseCollectionManager.insertStudyGroup(studyGroup));
             lastInitTime = LocalDateTime.now();
@@ -114,13 +101,6 @@ public class CollectionManager {
         return uniqueAdminNames.toString();
     }
 
-    public static LocalDateTime getLastInitTime() {
-        return lastInitTime;
-    }
-
-    public LocalDateTime getLastSaveTime() {
-        return lastSaveTime;
-    }
 
     public String collectionType() {
         try {
@@ -155,7 +135,6 @@ public class CollectionManager {
         return "Collection info:\n" +
                 " Type: " + collectionType() +
                 "\n Quantity: " + collectionSize() +
-                "\n Last save: " + lastSaveTime +
                 "\n Last enter: " + lastInitTime;
     }
 
@@ -173,17 +152,13 @@ public class CollectionManager {
             });
         } catch (NullPointerException e) {
             return "What do you want to clear? You didn't add any study groups";
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return "Failed in clear command";
         }
 
         return "Number of deleted elements: " + forRemove.size();
     }
 
-    public void saveCollection() {
-//        this.writeToFile();
-        lastSaveTime = LocalDateTime.now();
-    }
 
     public String auth(User user) throws DataBaseAuthorizationException {
         DataBaseUserManager userManager = dataBaseCollectionManager.getDataBaseUserManager();
@@ -249,7 +224,7 @@ public class CollectionManager {
         if (!studyGroupCollection.isEmpty()) {
             List<StudyGroup> listForSort = new ArrayList<>(studyGroupCollection);
             studyGroupCollection.clear();
-            Collections.sort(listForSort, new Comparator<StudyGroup>() {
+            Collections.sort(listForSort, new Comparator<>() {
                 @Override
                 public int compare(StudyGroup o1, StudyGroup o2) {
                     return o1.getName().compareTo(o2.getName());

@@ -26,13 +26,13 @@ public class AuthorizationManager {
                 String rawPassowrd = scanner.nextLine().trim();
                 MessageDigest md = MessageDigest.getInstance("SHA-512");
                 byte[] messageDigest = md.digest(rawPassowrd.getBytes());
-                BigInteger no = new BigInteger(1,messageDigest);
+                BigInteger no = new BigInteger(1, messageDigest);
                 String password = no.toString(16);
-                while (password.length()<32){
-                    password="0"+password;
+                while (password.length() < 32) {
+                    password = "0" + password;
                 }
                 return new User(login, password, true);
-            }else {
+            } else {
                 ConsoleManager.printInfoCyan("Hello, our user! I've been waiting for you for so long, I've missed you))))))");
                 ConsoleManager.printInfoCyan("Enter your login:");
                 String login = scanner.nextLine().trim();
@@ -40,12 +40,12 @@ public class AuthorizationManager {
                 String rawPassowrd = scanner.nextLine().trim();
                 MessageDigest md = MessageDigest.getInstance("SHA-512");
                 byte[] messageDigest = md.digest(rawPassowrd.getBytes());
-                BigInteger no = new BigInteger(1,messageDigest);
+                BigInteger no = new BigInteger(1, messageDigest);
                 String password = no.toString(16);
-                while (password.length()<32) {
+                while (password.length() < 32) {
                     password = "0" + password;
                 }
-                return new User(login,password,false);
+                return new User(login, password, false);
             }
         } catch (NoSuchAlgorithmException e) {
             ConsoleManager.printError("Authorization declined( beee");

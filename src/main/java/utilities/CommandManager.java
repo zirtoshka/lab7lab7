@@ -59,7 +59,8 @@ public class CommandManager {
         commandMap.put(REMOVE_BY_ID, new RemoveByIdCommand(user));
         commandMap.put(HELP, new HelpCommand(commandMap.entrySet()
                 .stream()
-                .map(entry -> entry.getValue().getName() + ": " + entry.getValue().getDescription() + "\n")
+//                .map(entry -> entry.getValue().getName() + ": " + entry.getValue().getDescription() + "\n")
+                .map((entry) -> entry.getValue().toString())
                 .collect(Collectors.joining())));
         this.checkIdCmd = new CheckIdCommand(user);
         commandMap.put(CHECK_ID, checkIdCmd);
@@ -67,71 +68,59 @@ public class CommandManager {
     }
 
     private void runCmd(Command cmd) {
-//        try {
-//            if (checkIsLogOut()) throw new LogOutException();
         System.out.println(runCmd + cmd.getName() + " ...");
         System.out.println(client.run(cmd));
         historyWriter.addInHistory(cmd.getName());
-//        } catch (LogOutException e) {
-//            ConsoleManager.printError("You log out, so this command is not available");
-//        }
     }
 
-    private void validateAdd(AddCommand cmd) throws IncorrectScriptException, IncorrectValuesForGroupException, LogOutException {
-        if (!checkIsLogOut()) {
-
-            StudyGroup clientGroup;
-            if (ScannerManager.askQuestion("Do you want to generate data for a new study group?", runScript, scriptScanner)) {
-                clientGroup = generateRandomGroup();
-            } else {
-                clientGroup = ScannerManager.askGroup(runScript, scriptScanner);
-            }
-            clientGroup.setOwner(user);
-            cmd.setArgGroup(clientGroup);
-        } else throw new LogOutException();
+    private void validateAdd(AddCommand cmd) throws IncorrectScriptException, IncorrectValuesForGroupException {
+        StudyGroup clientGroup;
+        if (ScannerManager.askQuestion("Do you want to generate data for a new study group?", runScript, scriptScanner)) {
+            clientGroup = generateRandomGroup();
+        } else {
+            clientGroup = ScannerManager.askGroup(runScript, scriptScanner);
+        }
+        clientGroup.setOwner(user);
+        cmd.setArgGroup(clientGroup);
 
     }
 
-    private void validateAddIfMax(AddIfMaxCommand command) throws IncorrectScriptException, LogOutException {
-        if (!checkIsLogOut()) {
-            StudyGroup clientGroup = ScannerManager.askGroup(runScript, scriptScanner);
-            clientGroup.setOwner(user);
-            command.setArgGroup(clientGroup);
-        } else throw new LogOutException();
+    private void validateAddIfMax(AddIfMaxCommand command) throws IncorrectScriptException {
+        StudyGroup clientGroup = ScannerManager.askGroup(runScript, scriptScanner);
+        clientGroup.setOwner(user);
+        command.setArgGroup(clientGroup);
     }
 
-    private void validateRemoveById(RemoveByIdCommand removeByIdCommand, String[] data) throws LogOutException {
-        if (!checkIsLogOut()) {
-            LinkedList<String> toId = new LinkedList<String>();
-            int lengthData = data.length;
-            boolean successGetId = false;
-            Integer id = wrongId;
-            while (!successGetId) {
-                try {
-                    if (lengthData == 1) {
-                        lengthData = 0;
-                        throw new ArgsException();
-                    }
-                    if (lengthData > 1) {
-                        toId.addLast(data[1]);
-                        lengthData = 0;
-                    }
-
-                    id = Integer.parseInt(toId.getLast());
-                    if (!(id > 0)) {
-                        throw new NumberFormatException();
-                    }
-                    successGetId = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("It can't be id\nEnter id:");
-                    toId.addLast(ScannerManager.askArgForCmd());
-                } catch (ArgsException e) {
-                    System.out.println("what id is? why it is empty?\nEnter id:");
-                    toId.addLast(ScannerManager.askArgForCmd());
+    private void validateRemoveById(RemoveByIdCommand removeByIdCommand, String[] data) {
+        LinkedList<String> toId = new LinkedList<String>();
+        int lengthData = data.length;
+        boolean successGetId = false;
+        Integer id = wrongId;
+        while (!successGetId) {
+            try {
+                if (lengthData == 1) {
+                    lengthData = 0;
+                    throw new ArgsException();
                 }
+                if (lengthData > 1) {
+                    toId.addLast(data[1]);
+                    lengthData = 0;
+                }
+
+                id = Integer.parseInt(toId.getLast());
+                if (!(id > 0)) {
+                    throw new NumberFormatException();
+                }
+                successGetId = true;
+            } catch (NumberFormatException e) {
+                System.out.println("It can't be id\nEnter id:");
+                toId.addLast(ScannerManager.askArgForCmd());
+            } catch (ArgsException e) {
+                System.out.println("what id is? why it is empty?\nEnter id:");
+                toId.addLast(ScannerManager.askArgForCmd());
             }
-            removeByIdCommand.setArgId(id);
-        } else throw new LogOutException();
+        }
+        removeByIdCommand.setArgId(id);
     }
 
     private void validateFilterContainsName(FilterContainsNameCommand command, String[] data) {
@@ -157,87 +146,73 @@ public class CommandManager {
         command.setName(toName.getLast());
     }
 
-    private void validateUpdateById(UpdateByIdCommand command, String[] data) throws IncorrectScriptException, LogOutException {
-        if (!checkIsLogOut()) {
-            LinkedList<String> toId = new LinkedList<String>();
-            int lengthData = data.length;
-            boolean successGetId = false;
-            Integer id = wrongId;
-            while (!successGetId) {
-                try {
-                    if (lengthData == 1) {
-                        lengthData = 0;
-                        throw new ArgsException();
-                    }
-                    if (lengthData > 1) {
-                        toId.addLast(data[1]);
-                        lengthData = 0;
-                    }
-
-                    id = Integer.parseInt(toId.getLast());
-                    if (!(id > 0)) {
-                        throw new NumberFormatException();
-                    }
-                    successGetId = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("It can't be id\nEnter id:");
-                    toId.addLast(ScannerManager.askArgForCmd());
-                } catch (ArgsException e) {
-                    System.out.println("what id is? why it is empty?\nEnter id:");
-                    toId.addLast(ScannerManager.askArgForCmd());
+    private void validateUpdateById(UpdateByIdCommand command, String[] data) throws IncorrectScriptException {
+        LinkedList<String> toId = new LinkedList<String>();
+        int lengthData = data.length;
+        boolean successGetId = false;
+        Integer id = wrongId;
+        while (!successGetId) {
+            try {
+                if (lengthData == 1) {
+                    lengthData = 0;
+                    throw new ArgsException();
                 }
-            }
-            command.setId(id);
-            checkIdCmd.setId(id);
-            String res = client.run(checkIdCmd);
-            if (res.contains("The command could not be executed ((") || res.contains("You can't update this study group because it's not yours")) {
-                System.out.println(res);
-            } else {
-                StudyGroup clientGroup = ScannerManager.askQuestionForUpdate(runScript, scriptScanner);
-                command.setArgGroup(clientGroup);
-            }
-        } else throw new LogOutException();
-    }
-
-    //    StudyGroup clientGroup = ScannerManager.askQuestionForUpdate(runScript, scriptScanner);
-//            updateByIdCmd.setArgGroup(clientGroup);
-    private void validateScriprt(ExecuteScriptCommand command, String[] data) throws ExitingException, IOException, LogOutException {
-        if (!checkIsLogOut()) {
-            LinkedList<String> toNameFile = new LinkedList<String>();
-            int lengthData = data.length;
-            boolean successGetFileName = false;
-            while (!successGetFileName) {
-                try {
-                    if (lengthData == 1) {
-                        lengthData = 0;
-                        throw new ArgsException();
-                    }
-                    if (lengthData > 1) {
-                        toNameFile.addLast(data[1]);
-                        lengthData = 0;
-                    }
-                    successGetFileName = true;
-                } catch (ArgsException e) {
-                    System.out.println("What do I need to execute??? why it is empty?\nEnter fileName:");
-                    toNameFile.addLast(ScannerManager.askArgForCmd());
+                if (lengthData > 1) {
+                    toId.addLast(data[1]);
+                    lengthData = 0;
                 }
-            }
-            scriptMode(toNameFile.getLast());
-        } else throw new LogOutException();
-    }
 
-    public boolean checkIsLogOut() {
-        if (user == null) {
-            return true;
+                id = Integer.parseInt(toId.getLast());
+                if (!(id > 0)) {
+                    throw new NumberFormatException();
+                }
+                successGetId = true;
+            } catch (NumberFormatException e) {
+                System.out.println("It can't be id\nEnter id:");
+                toId.addLast(ScannerManager.askArgForCmd());
+            } catch (ArgsException e) {
+                System.out.println("what id is? why it is empty?\nEnter id:");
+                toId.addLast(ScannerManager.askArgForCmd());
+            }
         }
-        return false;
-
+        command.setId(id);
+        checkIdCmd.setId(id);
+        String res = client.run(checkIdCmd);
+        if (res.contains("The command could not be executed ((") || res.contains("You can't update this study group because it's not yours")) {
+            System.out.println(res);
+        } else {
+            StudyGroup clientGroup = ScannerManager.askQuestionForUpdate(runScript, scriptScanner);
+            command.setArgGroup(clientGroup);
+        }
     }
+
+    private void validateScriprt(ExecuteScriptCommand command, String[] data) throws ExitingException, IOException, LogOutException {
+        LinkedList<String> toNameFile = new LinkedList<String>();
+        int lengthData = data.length;
+        boolean successGetFileName = false;
+        while (!successGetFileName) {
+            try {
+                if (lengthData == 1) {
+                    lengthData = 0;
+                    throw new ArgsException();
+                }
+                if (lengthData > 1) {
+                    toNameFile.addLast(data[1]);
+                    lengthData = 0;
+                }
+                successGetFileName = true;
+            } catch (ArgsException e) {
+                System.out.println("What do I need to execute??? why it is empty?\nEnter fileName:");
+                toNameFile.addLast(ScannerManager.askArgForCmd());
+            }
+        }
+        scriptMode(toNameFile.getLast());
+    }
+
 
     public void managerWork(String s) throws IncorrectScriptException, IncorrectValuesForGroupException, ExitingException, IOException, LogOutException {
         String[] data = cmdParser(s);
         Command cmd = commandMap.get(data[0]);
-
         if (cmd != null) {
             if (cmd.getName().equals(ADD_IF_MAX)) {
                 validateAddIfMax((AddIfMaxCommand) cmd);
@@ -255,7 +230,6 @@ public class CommandManager {
                 throw new ExitingException();
             } else if (cmd.getName().equals(LOG_OUT)) {
                 this.user = null;
-            }else if(cmd.getName().equals(CLEAR)){
                 throw new LogOutException();
             }
             runCmd(cmd);
@@ -312,13 +286,10 @@ public class CommandManager {
                         if (userCmd[ARG_CMD].equals(scri)) throw new ScriptRecurentException();
                     }
                 }
-
-
                 managerWork(userCmd[NAME_CMD] + " " + userCmd[ARG_CMD]);
                 if (userCmd[NAME_CMD].equals(EXIT)) {
                     System.exit(1);
                 }
-
             } while (scriptScanner.hasNextLine());
 
         } catch (NoAccessToFileException e) {

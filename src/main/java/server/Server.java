@@ -3,8 +3,6 @@ package server;
 
 import IO.ConsoleManager;
 import commands.Command;
-import commands.SaveCommand;
-import exceptions.ExitingException;
 import exceptions.PropertiesException;
 import utilities.*;
 import utilities.Module;
@@ -18,8 +16,6 @@ import static utilities.PropHelper.*;
 public class Server {
     private int port;
     private Socket socket;
-//    private DatagramSocket datagramSocket;
-
     private ServerSocket server;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
@@ -34,7 +30,7 @@ public class Server {
                 server = new ServerSocket(port);
 //                datagramSocket=new DatagramSocket(port);
                 connect = true;
-                ConsoleManager.printInfoPurple( "The server is up and accessible by port " + port + " .");
+                ConsoleManager.printInfoPurple( "The server is up and accessible by port " + port );
             } catch (Exception e) {
                 port = (int) (Math.random() * 20000 + 10000);
             }
@@ -46,8 +42,6 @@ public class Server {
         DataBaseCollectionManager dataBaseCollectionManager = new DataBaseCollectionManager(dataBaseHandler,dataBaseUserManager);
         CollectionManager collectionManager = new CollectionManager(dataBaseCollectionManager);
         Module.setCollectionManager(collectionManager);
-        //todo  serializer = new Serializer();
-        //        deserializer = Deserializer.get();
     }
 
     public void runServer() {
@@ -75,12 +69,7 @@ public class Server {
         try {
             if (stream.available() > 0) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-                if (reader.readLine().equals("save")) {
-                    SaveCommand save = new SaveCommand();
-                    save.setCollectionManager(Module.getCollectionManager());
-                    save.execute();
-                    ConsoleManager.printInfoGreen("Collection is saved");
-                }
+
             }
         } catch (IOException  e) {
             e.printStackTrace();

@@ -22,17 +22,14 @@ public class Client {
     private Serializer serializer;
     private Deserializer deserializer;
     private ByteBuffer buffer;
-    private DatagramChannel datagramChannel;
     private User user;
 
-    public Client(String h, int p, User user) throws Disconnect, IOException{
+    public Client(String h, int p, User user) throws Disconnect, IOException {
         this.host = h;
         this.port = p;
-        this.user=user;
+        this.user = user;
         serializer = new Serializer();
         deserializer = new Deserializer();
-        datagramChannel=DatagramChannel.open();
-        datagramChannel.configureBlocking(false);
         buffer = ByteBuffer.allocate(CAPACITY_BUFFER);
         findServer();
 
@@ -45,7 +42,7 @@ public class Client {
             sendObject(o1);
             out = (String) getObject();
             close();
-        } catch (IOException  e) {
+        } catch (IOException e) {
             return "ohh(( No connection with the server";
         }
         return out;
@@ -60,38 +57,32 @@ public class Client {
         client.write(serializer.serialize(object));
     }
 
-    private Object getObject()  {
+    private Object getObject() {
         while (true) {
             try {
                 client.read(buffer);
                 Object o = deserializer.deserialize(buffer);
                 buffer = ByteBuffer.allocate(CAPACITY_BUFFER);
                 return o;
-        } catch (IOException | ClassNotFoundException ignored){
+            } catch (IOException | ClassNotFoundException ignored) {
             }
-    }}
+        }
+    }
 
     private void close() throws IOException {
         client.close();
     }
 
     private void findServer() throws Disconnect {
-        ConsoleManager.printInfoPurple( "Connecting to the server...");
+        ConsoleManager.printInfoPurple("Connecting to the server...");
         String result = run(new Connect(user));
         System.out.println(result);
-        if (!(result.equals("Registration and authorization succeeded\nExecution is successful\n")||result.equals("Authorization succeeded\nExecution is successful\n"))) {
+        if (!(result.equals("Registration and authorization succeeded\nExecution is successful\n") || result.equals("Authorization succeeded\nExecution is successful\n"))) {
             ConsoleManager.printInfoPurple(result);
             throw new Disconnect("No connection");
         }
         ConsoleManager.printInfoPurple(result);
     }
-//    public boolean waitReceive(DatagramChannel channel, ByteBuffer byteBuffer){
-//        return waitReceive(channel, byteBuffer, 5);
-//    }
-
-//    private boolean waitReceive(DatagramChannel channel, ByteBuffer byteBuffer, int i) {
-//    }
-    //todo
 
 
 }

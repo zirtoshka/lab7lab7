@@ -4,18 +4,16 @@ import data.User;
 import utilities.CollectionManager;
 import utilities.Module;
 
-public class CheckIdCommand extends Command  {
+public class CheckIdCommand extends Command {
     private CollectionManager collectionManager;
     private Integer id;
     private User user;
 
     public CheckIdCommand(User user) {
-        super("check_id", "comd for update",true);
+        super("check_id", "comd for update", true);
         this.user = user;
 
     }
-
-
 
     public void setCollectionManager(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
@@ -28,14 +26,14 @@ public class CheckIdCommand extends Command  {
     @Override
     public boolean execute() {
         try {
-
-        if (collectionManager.findById(id).getOwner().getUsername().equals(user.getUsername())) {
-            if (collectionManager.findById(id) == null) {
-                Module.addMessage("No group with this id(");
-                return false;
+            if (collectionManager.findById(id).getOwner().getUsername().equals(user.getUsername())) {
+                if (collectionManager.findById(id) == null) {
+                    Module.addMessage("No group with this id(");
+                    return false;
+                }
+                return true;
             }
-            return true;
-        }}catch (NullPointerException e ){
+        } catch (NullPointerException e) {
             Module.addMessage("No group with this id(");
             return false;
         }

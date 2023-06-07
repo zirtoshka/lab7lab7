@@ -1,16 +1,11 @@
 package utilities;
 
-import IO.ConsoleManager;
 import data.*;
-import exceptions.DataBaseAuthorizationException;
 import exceptions.DatabaseHandlingException;
-import exceptions.IncorrectValuesForGroupException;
 
-import java.lang.reflect.Type;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
-import java.util.Collections;
 
 import static config.ConfigDataBase.*;
 
@@ -33,13 +28,14 @@ public class DataBaseCollectionManager {
             Integer shouldBeExpelled = resultSet.getInt(STUDY_GROUP_TABLE_SHOULD_BE_EXPELLED_COLUMN);
             double averageMark = resultSet.getDouble(STUDY_GROUP_TABLE_AVERAGE_MARK_COLUMN);
             Semester semester = Semester.valueOf(resultSet.getObject(STUDY_GROUP_TABLE_SEMESTER_COLUMN).toString());
-            String nameAdmin =resultSet.getString(GROUP_ADMIN_TABLE_NAME_COLUMN);
-            Person admin=null;
-            if(nameAdmin!=null){
-             admin = new Person(nameAdmin, resultSet.getTime(GROUP_ADMIN_TABLE_BIRTHDAY_COLUMN),
-                    ColorEye.valueOf(resultSet.getObject(GROUP_ADMIN_TABLE_EYE_COLOR_COLUMN).toString()),
-                    ColorHair.valueOf(resultSet.getObject(GROUP_ADMIN_TABLE_HAIR_COLOR_COLUMN).toString()),
-                    Country.valueOf(resultSet.getObject(GROUP_ADMIN_TABLE_NATIONALITY_COLUMN).toString()));}
+            String nameAdmin = resultSet.getString(GROUP_ADMIN_TABLE_NAME_COLUMN);
+            Person admin = null;
+            if (nameAdmin != null) {
+                admin = new Person(nameAdmin, resultSet.getTime(GROUP_ADMIN_TABLE_BIRTHDAY_COLUMN),
+                        ColorEye.valueOf(resultSet.getObject(GROUP_ADMIN_TABLE_EYE_COLOR_COLUMN).toString()),
+                        ColorHair.valueOf(resultSet.getObject(GROUP_ADMIN_TABLE_HAIR_COLOR_COLUMN).toString()),
+                        Country.valueOf(resultSet.getObject(GROUP_ADMIN_TABLE_NATIONALITY_COLUMN).toString()));
+            }
 
             User owner = new User(resultSet.getString(USER_TABLE_USERNAME_COLUMN), resultSet.getString(USER_TABLE_PASSWORD_COLUMN), true);
 
@@ -54,7 +50,6 @@ public class DataBaseCollectionManager {
                     admin, owner);
 
 
-
         } catch (SQLException e) {
             return null;
         }
@@ -65,7 +60,9 @@ public class DataBaseCollectionManager {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = dataBaseHandler.getPreparedStatement(SELECT_ALL_STUDY_GROUPS, false);
-            if(preparedStatement==null){return studyGroups;}
+            if (preparedStatement == null) {
+                return studyGroups;
+            }
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 StudyGroup studyGroupFromDatabase = createStudyGroup(resultSet);
@@ -99,7 +96,7 @@ public class DataBaseCollectionManager {
         }
     }
 
-    public StudyGroup insertStudyGroup(StudyGroup studyGroup) throws DatabaseHandlingException{
+    public StudyGroup insertStudyGroup(StudyGroup studyGroup) throws DatabaseHandlingException {
         PreparedStatement preparedStatement = null;
         try {
             dataBaseHandler.setCommitMode();
@@ -118,9 +115,7 @@ public class DataBaseCollectionManager {
             preparedStatement.executeUpdate();
 
             if (studyGroup.getGroupAdmin() != null) {
-//                ConsoleManager.printInfoCyan(studyGroup);
-                preparedStatement=dataBaseHandler.getPreparedStatement(INSERT_GROUP_ADMIN, true);
-//                ConsoleManager.printInfoCyan(preparedStatement);
+                preparedStatement = dataBaseHandler.getPreparedStatement(INSERT_GROUP_ADMIN, true);
                 preparedStatement.setInt(1, studyGroup.getId());
                 preparedStatement.setString(2, studyGroup.getGroupAdmin().getName());
                 preparedStatement.setObject(3, studyGroup.getGroupAdmin().getBirthday(), Types.TIMESTAMP);
@@ -133,11 +128,11 @@ public class DataBaseCollectionManager {
             dataBaseHandler.commit();
             return studyGroup;
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             dataBaseHandler.rollback();
             throw new DatabaseHandlingException();
-        }finally {
+        } finally {
             dataBaseHandler.closePreparedStatement(preparedStatement);
             dataBaseHandler.setNormalMode();
         }

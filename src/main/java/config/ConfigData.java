@@ -18,7 +18,6 @@ public class ConfigData {
     public static final String PRINT_FIELD_DESCENDING_SEMESTER = "print_field_descending_semester_enum";
     public static final String PRINT_UNIQUE_GROUP_ADMIN = "print_unique_group_admin";
     public static final String REMOVE_BY_ID = "remove_by_id";
-    public static final String SAVE = "save";
     public static final String SHOW = "show";
     public static final String UPDATE_BY_ID = "update_by_id";
     public static final String CONNECT="connect";

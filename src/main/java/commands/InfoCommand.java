@@ -8,7 +8,7 @@ public class InfoCommand extends Command {
     private CollectionManager collectionManager;
 
     public InfoCommand() {
-        super("info", "print information about the collection",true);
+        super("info", "print information about the collection", true);
     }
 
 

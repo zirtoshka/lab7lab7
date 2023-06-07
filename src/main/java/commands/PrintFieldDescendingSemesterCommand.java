@@ -12,7 +12,7 @@ public class PrintFieldDescendingSemesterCommand extends Command {
     }
 
     public PrintFieldDescendingSemesterCommand() {
-        super("print_field_descending_semester_enum", "display the values of the semesterEnum field of all elements in descending order",true);
+        super("print_field_descending_semester_enum", "display the values of the semesterEnum field of all elements in descending order", true);
     }
 
     @Override

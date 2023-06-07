@@ -14,8 +14,7 @@ public class App {
         } catch (ArrayIndexOutOfBoundsException e) {
             ConsoleManager.printError("I can't find name of file");
         } catch (PropertiesException e) {
-            //todo exception
-            throw new RuntimeException(e);
+            e.printStackTrace();
 
         }
     }

@@ -11,8 +11,8 @@ public class RemoveByIdCommand extends Command {
     private User user;
 
     public RemoveByIdCommand(User user) {
-        super("remove_by_id", "remove element by id",true);
-        this.user=user;
+        super("remove_by_id", "remove element by id", true);
+        this.user = user;
 
     }
 

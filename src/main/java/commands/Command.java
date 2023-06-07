@@ -1,6 +1,5 @@
 package commands;
 
-import exceptions.ExitingException;
 import utilities.CollectionManager;
 
 import java.io.IOException;
@@ -47,9 +46,8 @@ public abstract class Command implements Serializable {
 
     @Override
     public String toString() {
-        return "Command{" +
-                "name = '" + name + "', description = '" +
-                description + "}";
+        return  name+ ", description = " +
+                description + "\n";
     }
 
     @Override

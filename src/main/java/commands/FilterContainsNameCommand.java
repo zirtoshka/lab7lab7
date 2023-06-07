@@ -10,7 +10,7 @@ public class FilterContainsNameCommand extends Command {
     private String name;
 
     public FilterContainsNameCommand() {
-        super("filter_contains_name", "display elements whose name field value contains the given substring",true);
+        super("filter_contains_name", "display elements whose name field value contains the given substring", true);
     }
 
     public void setCollectionManager(CollectionManager collectionManager) {
@@ -25,7 +25,6 @@ public class FilterContainsNameCommand extends Command {
     @Override
     public boolean execute() {
         try {
-
             if (collectionManager.collectionSize() == 0) throw new NullCollectionException();
             boolean isDone = false;
             for (StudyGroup sg : collectionManager.getStudyGroupCollection()

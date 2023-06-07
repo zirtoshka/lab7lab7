@@ -9,7 +9,7 @@ public class HistoryCommand extends Command {
     private final int numberOfCmd;
 
     public HistoryCommand(HistoryWriter historyWriter, int numberOfCmd) {
-        super("history", "View last " + numberOfCmd + " commands",false);
+        super("history", "View last " + numberOfCmd + " commands", false);
         this.historyWriter = historyWriter;
         this.numberOfCmd = numberOfCmd;
     }

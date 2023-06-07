@@ -5,13 +5,14 @@ import data.StudyGroup;
 import utilities.CollectionManager;
 import utilities.Module;
 
-public class AddIfMaxCommand extends Command  {
+public class AddIfMaxCommand extends Command {
     private CollectionManager collectionManager;
     private StudyGroup studyGroup;
 
     public AddIfMaxCommand() {
         super("add_if_max", "add a new element if the number of students in the new group is more than in the others", true);
     }
+
     public void setCollectionManager(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
@@ -20,19 +21,11 @@ public class AddIfMaxCommand extends Command  {
         this.studyGroup = studyGroup;
     }
 
-    public void setStudyGroup(StudyGroup studyGroup) {
-        this.studyGroup = studyGroup;
-    }
-
 
     @Override
     public boolean execute() {
         Module.addMessage(collectionManager.addToCollectionIfMax(studyGroup));
         return true;
-    }
-
-    public CollectionManager getCollectionManager() {
-        return collectionManager;
     }
 }
 

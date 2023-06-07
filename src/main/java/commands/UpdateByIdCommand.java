@@ -1,17 +1,14 @@
 package commands;
 
 
-import IO.ConsoleManager;
 import data.Person;
 import data.StudyGroup;
 import exceptions.ArgsException;
-import exceptions.IncorrectValuesForGroupException;
 import exceptions.NullCollectionException;
 import exceptions.StudyGroupNullException;
 import utilities.CollectionManager;
 import utilities.Module;
 
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 
@@ -42,14 +39,10 @@ public class UpdateByIdCommand extends Command {
         return collectionManager;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     @Override
     public boolean execute() {
         try {
-            if(argGroup==null) throw new ArgsException();
+            if (argGroup == null) throw new ArgsException();
             if (collectionManager.collectionSize() == 0) throw new NullCollectionException();
             StudyGroup studyGroup = collectionManager.getById(id);
             if (studyGroup == null) throw new StudyGroupNullException();
@@ -74,13 +67,13 @@ public class UpdateByIdCommand extends Command {
                 studyGroup.setAverageMark(argGroup.getAverageMark());
 
             }
-            if (!Objects.equals(argGroup.getSemesterEnum() , StudyGroup.wrongSemesterEnum)) {
+            if (!Objects.equals(argGroup.getSemesterEnum(), StudyGroup.wrongSemesterEnum)) {
                 studyGroup.setSemesterEnum(argGroup.getSemesterEnum());
 
             }
             if (argGroup.getGroupAdmin() == null) {
                 studyGroup.setGroupAdmin(argGroup.getGroupAdmin());
-            } else if (!Objects.equals(argGroup.getGroupAdmin().getEyeColor() , Person.defaultEyeColor)) {
+            } else if (!Objects.equals(argGroup.getGroupAdmin().getEyeColor(), Person.defaultEyeColor)) {
                 studyGroup.setGroupAdmin(argGroup.getGroupAdmin());
 
             }
@@ -93,7 +86,7 @@ public class UpdateByIdCommand extends Command {
         } catch (StudyGroupNullException e) {
             Module.addMessage("No such Study Group with that ID");
             return false;
-        }catch (ArgsException e){
+        } catch (ArgsException e) {
             return false;
         }
     }
