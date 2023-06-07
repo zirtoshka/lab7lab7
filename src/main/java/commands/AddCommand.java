@@ -2,6 +2,7 @@ package commands;
 
 
 import data.StudyGroup;
+import exceptions.LogOutException;
 import utilities.CollectionManager;
 import utilities.Module;
 
@@ -29,8 +30,13 @@ public class AddCommand extends Command  {
 
     @Override
     public boolean execute() {
-        Module.addMessage(collectionManager.addToCollection(argGroup));
-        return true;
+//        try {
+//            if (argGroup.getOwner() == null) throw new LogOutException();
+            Module.addMessage(collectionManager.addToCollection(argGroup));
+            return true;
+//        }catch (LogOutException e){
+//            return false;
+//        }
     }
 
 

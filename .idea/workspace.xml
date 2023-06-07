@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="починився парсинг сг">
+    <list default="true" id="44b8dbb5-aa6c-477b-b905-67ea4c1dcfb8" name="Changes" comment="exit update">
+      <change afterPath="$PROJECT_DIR$/src/main/java/commands/LogOutCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/LogOutException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IO/ScannerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CheckIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CheckIdCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateByIdCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/AuthorizationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/AuthorizationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/ConfigData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/ConfigData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utilities/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/DataBaseCollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/Module.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -148,7 +142,7 @@
       <workItem from="1685777625842" duration="15758000" />
       <workItem from="1685804307392" duration="14199000" />
       <workItem from="1686062277257" duration="5089000" />
-      <workItem from="1686089405997" duration="8007000" />
+      <workItem from="1686089405997" duration="11192000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1685532076876</created>
@@ -192,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686084437996</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="exit update">
+      <created>1686150129263</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1686150129263</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +206,7 @@
     <MESSAGE value="map" />
     <MESSAGE value="db" />
     <MESSAGE value="починився парсинг сг" />
-    <option name="LAST_COMMIT_MESSAGE" value="починився парсинг сг" />
+    <MESSAGE value="exit update" />
+    <option name="LAST_COMMIT_MESSAGE" value="exit update" />
   </component>
 </project>

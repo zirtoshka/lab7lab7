@@ -6,6 +6,7 @@ import IO.ScannerManager;
 import exceptions.ExitingException;
 import exceptions.IncorrectScriptException;
 import exceptions.IncorrectValuesForGroupException;
+import exceptions.LogOutException;
 import utilities.CommandManager;
 
 import java.io.IOException;
@@ -23,6 +24,8 @@ public class Console {
                 commandManager.managerWork(input);
             } catch (ExitingException e) {
                 break;
+            }catch (LogOutException e){
+                    ConsoleManager.printError("You log out, so this command is not available");
             }
         }
 
