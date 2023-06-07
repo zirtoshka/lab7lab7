@@ -27,6 +27,7 @@ public class CheckIdCommand extends Command  {
 
     @Override
     public boolean execute() {
+        try {
 
         if (collectionManager.findById(id).getOwner().getUsername().equals(user.getUsername())) {
             if (collectionManager.findById(id) == null) {
@@ -34,6 +35,9 @@ public class CheckIdCommand extends Command  {
                 return false;
             }
             return true;
+        }}catch (NullPointerException e ){
+            Module.addMessage("No group with this id(");
+            return false;
         }
         Module.addMessage("You can't update this study group because it's not yours(");
         return false;

@@ -1,6 +1,7 @@
 package utilities;
 
 import commands.*;
+import exceptions.ExitingException;
 
 import java.io.IOException;
 import java.util.Scanner;

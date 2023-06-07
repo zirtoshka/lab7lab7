@@ -9,8 +9,9 @@ public class ClearCommand extends Command {
     private CollectionManager collectionManager;
     private User user;
 
-    public ClearCommand() {
+    public ClearCommand(User user) {
         super("clear", "clear collection",true);
+        this.user=user;
 
 
     }
@@ -25,8 +26,8 @@ public class ClearCommand extends Command {
 
     @Override
     public boolean execute() {
-        collectionManager.clearCollection(user);
-        Module.addMessage("Collection is cleared");
+
+        Module.addMessage( collectionManager.clearCollection(user));
         return true;
     }
 }

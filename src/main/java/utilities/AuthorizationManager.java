@@ -38,7 +38,7 @@ public class AuthorizationManager {
                 String login = scanner.nextLine().trim();
                 ConsoleManager.printInfoCyan("Enter your password: ");
                 String rawPassowrd = scanner.nextLine().trim();
-                MessageDigest md = MessageDigest.getInstance("20SHA-512");
+                MessageDigest md = MessageDigest.getInstance("SHA-512");
                 byte[] messageDigest = md.digest(rawPassowrd.getBytes());
                 BigInteger no = new BigInteger(1,messageDigest);
                 String password = no.toString(16);

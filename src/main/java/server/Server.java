@@ -4,6 +4,7 @@ package server;
 import IO.ConsoleManager;
 import commands.Command;
 import commands.SaveCommand;
+import exceptions.ExitingException;
 import exceptions.PropertiesException;
 import utilities.*;
 import utilities.Module;
@@ -68,7 +69,7 @@ public class Server {
                 Module.addMessage("The command could not be executed ((");
             }
             sendObject(Module.messageFlush());
-        } catch (IOException e) {
+        } catch (IOException  e) {
             e.printStackTrace();
         }
         try {
@@ -81,7 +82,7 @@ public class Server {
                     ConsoleManager.printInfoGreen("Collection is saved");
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException  e) {
             e.printStackTrace();
         }
     }

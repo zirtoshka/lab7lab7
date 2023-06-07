@@ -42,7 +42,7 @@ public class CommandManager {
         commandMap.put(ADD, new AddCommand());
         commandMap.put(SHOW, new ShowCommand());
         commandMap.put(ADD_IF_MAX, new AddIfMaxCommand());
-        commandMap.put(CLEAR, new ClearCommand());
+        commandMap.put(CLEAR, new ClearCommand( user));
         commandMap.put(HEAD, new HeadCommand());
         commandMap.put(EXECUTE_SCRIPT, new ExecuteScriptCommand());
         commandMap.put(EXIT, new ExitCommand());
@@ -143,7 +143,7 @@ public class CommandManager {
         command.setName(toName.getLast());
     }
 
-    private void validateUpdateById(UpdateByIdCommand command, String[] data) {
+    private void validateUpdateById(UpdateByIdCommand command, String[] data) throws IncorrectScriptException {
         LinkedList<String> toId = new LinkedList<String>();
         int lengthData = data.length;
         boolean successGetId = false;
@@ -177,8 +177,9 @@ public class CommandManager {
         String res = client.run(checkIdCmd);
         if (res.contains("The command could not be executed ((") || res.contains("You can't update this study group because it's not yours")) {
             System.out.println(res);
-        }
-        return;
+        }else{
+        StudyGroup clientGroup = ScannerManager.askQuestionForUpdate(runScript,scriptScanner);
+        command.setArgGroup(clientGroup);}
     }
 
     //    StudyGroup clientGroup = ScannerManager.askQuestionForUpdate(runScript, scriptScanner);
@@ -210,13 +211,11 @@ public class CommandManager {
         String[] data = cmdParser(s);
         Command cmd = commandMap.get(data[0]);
         if (cmd != null) {
-            System.out.println(cmd.getName());
             if (cmd.getName().equals(ADD_IF_MAX)) {
                 validateAddIfMax((AddIfMaxCommand) cmd);
             } else if (cmd.getName().equals(ADD)) {
                 validateAdd((AddCommand) cmd);
             } else if (cmd.getName().equals(REMOVE_BY_ID)) {
-                System.out.println(22222);
                 validateRemoveById((RemoveByIdCommand) cmd,data);
             }else if(cmd.getName().equals(FILTER_CONTAINS_NAME)){
                 validateFilterContainsName((FilterContainsNameCommand) cmd,data);
@@ -224,6 +223,8 @@ public class CommandManager {
                 validateUpdateById((UpdateByIdCommand) cmd,data);
             } else if (cmd.getName().equals(EXECUTE_SCRIPT)) {
                 validateScriprt((ExecuteScriptCommand) cmd,data);
+            }else if(cmd.getName().equals(EXIT)){
+                throw new ExitingException();
             }
             runCmd(cmd);
         } else {

@@ -61,20 +61,33 @@ public class CollectionManager {
             studyGroupCollection.add(dataBaseCollectionManager.insertStudyGroup(studyGroupFromUser));
             lastInitTime = LocalDateTime.now();
             return "StudyGroup added successfully";
-        }catch (DatabaseHandlingException e){
-            return "failed to add the group";
+        } catch (DatabaseHandlingException e) {
+            return "Failed to add the group";
         }
     }
 
+    public String updateById(StudyGroup studyGroup) {
+        try {
+////            studyGroupCollection.stream().filter((StudyGroup) -> StudyGroup.getOwner().getUsername().equals(user.getUsername())).forEach(forRemove::add);
+////            studyGroupCollection.removeAll(forRemove);
+//        } catch (NullPointerException e) {
+//            return "What do you want to clear? You didn't add any study groups";
+//        }
+//
+//        return "Number of deleted elements: " + forRemove.size();
+            dataBaseCollectionManager.removeStudyGroupById(studyGroup.getId());
+            studyGroupCollection.add(dataBaseCollectionManager.insertStudyGroup(studyGroup));
+            lastInitTime = LocalDateTime.now();
+            return "StudyGroup updated successfully";
+        } catch (DatabaseHandlingException e) {
+            return "Failed to update the group";
+
+        }
+    }
 
     public String addToCollectionIfMax(StudyGroup studyGroupFromUser) {
         if (studyGroupFromUser.getStudentsCount() > getMaxNumberInGroup()) {
-            if (studyGroupFromUser.getId().equals(wrongId)) {
-                studyGroupFromUser.setId(generateId());
-            }
-            studyGroupCollection.add(studyGroupFromUser);
-            lastInitTime = LocalDateTime.now();
-            return "StudyGroup added successfully";
+            return addToCollection(studyGroupFromUser);
         }
         return "The StudyGroup is less than maximum.";
     }
@@ -130,10 +143,11 @@ public class CollectionManager {
     }
 
     public void loadCollection() {
-        studyGroupCollection=dataBaseCollectionManager.getCollection(this);
+        studyGroupCollection = dataBaseCollectionManager.getCollection(this);
 
     }
-    public void updateIdSet(Integer groupId){
+
+    public void updateIdSet(Integer groupId) {
         idSet.add(groupId);
     }
 
@@ -146,20 +160,35 @@ public class CollectionManager {
     }
 
     public String clearCollection(User user) {
-        ArrayDeque<StudyGroup> forRemove=new ArrayDeque<>();
-        studyGroupCollection.stream().filter((StudyGroup)->StudyGroup.getOwner().getUsername().equals(user.getUsername())).forEach(forRemove::add);
-        studyGroupCollection.removeAll(forRemove);
-        return "Number of deleted elements: "+forRemove.size();
+        ArrayDeque<StudyGroup> forRemove = new ArrayDeque<>();
+        try {
+            studyGroupCollection.stream().filter((StudyGroup) -> StudyGroup.getOwner().getUsername().equals(user.getUsername())).forEach(forRemove::add);
+            studyGroupCollection.removeAll(forRemove);
+            forRemove.forEach((StudyGroup) -> {
+                try {
+                    dataBaseCollectionManager.removeStudyGroupById(StudyGroup.getId());
+                } catch (DatabaseHandlingException e) {
+                    throw new RuntimeException();
+                }
+            });
+        } catch (NullPointerException e) {
+            return "What do you want to clear? You didn't add any study groups";
+        }catch (RuntimeException e){
+            return "Failed in clear command";
+        }
+
+        return "Number of deleted elements: " + forRemove.size();
     }
 
     public void saveCollection() {
 //        this.writeToFile();
         lastSaveTime = LocalDateTime.now();
     }
-    public String auth(User user) throws DataBaseAuthorizationException{
-        DataBaseUserManager userManager= dataBaseCollectionManager.getDataBaseUserManager();
+
+    public String auth(User user) throws DataBaseAuthorizationException {
+        DataBaseUserManager userManager = dataBaseCollectionManager.getDataBaseUserManager();
         try {
-            if(user.isSignUp()){
+            if (user.isSignUp()) {
                 try {
                     userManager.getUserByUsername(user.getUsername());
                     throw new DataBaseAuthorizationException("This login is already exists");
@@ -168,10 +197,11 @@ public class CollectionManager {
                     e.printStackTrace();
                     return "Registration and authorization succeeded";
                 }
-            }else if(!userManager.checkUserByUsernamePassword(user)) throw new DatabaseHandlingException();
-        }catch (DatabaseHandlingException e){
+            } else if (!userManager.checkUserByUsernamePassword(user)) throw new DatabaseHandlingException();
+        } catch (DatabaseHandlingException e) {
             throw new DataBaseAuthorizationException("Authorization declined");
-        }return "Authorization succeeded";
+        }
+        return "Authorization succeeded";
     }
 
     public String headOfCollection() {
@@ -198,23 +228,26 @@ public class CollectionManager {
     public String removeById(Integer id, User user) {
         try {
             if (findById(id) == null) throw new StudyGroupNullException();
-            if(findById(id).getOwner().getUsername().equals(user.getUsername())){
+            if (findById(id).getOwner().getUsername().equals(user.getUsername())) {
                 try {
+                    studyGroupCollection.remove(studyGroupCollection.stream().filter((StudyGroup) -> Objects.equals(StudyGroup.getId(), id)).findFirst().get());
                     dataBaseCollectionManager.removeStudyGroupById(id);
                     sortCollection();
-                }catch (DatabaseHandlingException e){
+                } catch (DatabaseHandlingException e) {
                     return "An error occurred when deleting an element";
                 }
-            }else throw new OtherOwnerException();
-        }catch (StudyGroupNullException e ){
+            } else throw new OtherOwnerException();
+        } catch (StudyGroupNullException e) {
             return "No Study Group with that ID";
-        }catch (OtherOwnerException e){
+        } catch (OtherOwnerException e) {
             return "It's not your group, so I can't delete it";
-        }return "The study group was removed";
+        }
+        return "The study group was removed";
     }
-    public void sortCollection(){
-        if(!studyGroupCollection.isEmpty()){
-            List<StudyGroup> listForSort=new ArrayList<>(studyGroupCollection);
+
+    public void sortCollection() {
+        if (!studyGroupCollection.isEmpty()) {
+            List<StudyGroup> listForSort = new ArrayList<>(studyGroupCollection);
             studyGroupCollection.clear();
             Collections.sort(listForSort, new Comparator<StudyGroup>() {
                 @Override
@@ -225,8 +258,13 @@ public class CollectionManager {
             studyGroupCollection.addAll(listForSort);
         }
     }
-    public StudyGroup findById(int id){
-        return studyGroupCollection.stream().filter((studyGroup) -> studyGroup.getId().equals(id)).findAny().get();
+
+    public StudyGroup findById(int id) {
+        try {
+            return studyGroupCollection.stream().filter((studyGroup) -> studyGroup.getId().equals(id)).findAny().get();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     public int getMaxNumberInGroup() {

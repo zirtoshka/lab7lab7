@@ -118,12 +118,12 @@ public class DataBaseCollectionManager {
             preparedStatement.executeUpdate();
 
             if (studyGroup.getGroupAdmin() != null) {
-                ConsoleManager.printInfoCyan(studyGroup);
+//                ConsoleManager.printInfoCyan(studyGroup);
                 preparedStatement=dataBaseHandler.getPreparedStatement(INSERT_GROUP_ADMIN, true);
-                ConsoleManager.printInfoCyan(preparedStatement);
+//                ConsoleManager.printInfoCyan(preparedStatement);
                 preparedStatement.setInt(1, studyGroup.getId());
                 preparedStatement.setString(2, studyGroup.getGroupAdmin().getName());
-                preparedStatement.setObject(3, studyGroup.getGroupAdmin().getBirthday());
+                preparedStatement.setObject(3, studyGroup.getGroupAdmin().getBirthday(), Types.TIMESTAMP);
                 preparedStatement.setObject(4, studyGroup.getGroupAdmin().getEyeColor(), Types.OTHER);
                 preparedStatement.setObject(5, studyGroup.getGroupAdmin().getHairColor(), Types.OTHER);
                 preparedStatement.setObject(6, studyGroup.getGroupAdmin().getNationality(), Types.OTHER);

@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.ExitingException;
 import utilities.CollectionManager;
 
 import java.io.IOException;

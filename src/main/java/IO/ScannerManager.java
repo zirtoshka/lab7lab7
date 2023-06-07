@@ -455,7 +455,7 @@ public class ScannerManager {
     }
 
 
-    public static StudyGroup askQuestionForUpdate(boolean runScript, Scanner scriptScanner) throws IncorrectScriptException, IncorrectValuesForGroupException {
+    public static StudyGroup askQuestionForUpdate(boolean runScript, Scanner scriptScanner) throws IncorrectScriptException {
         String name = wrongName;
         Coordinates coordinates = wrongCoordinates;
         LocalDateTime creationDate = LocalDateTime.now();
