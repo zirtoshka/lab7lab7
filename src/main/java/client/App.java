@@ -19,9 +19,9 @@ public class App {
     public static void main(String[] args) {
         int port = ScannerManager.askPort();
         String host = ScannerManager.askHost();
-        boolean sign = false;
+        boolean sign;
         do {
-            sign=false;
+            sign = false;
             AuthorizationManager auth = new AuthorizationManager(new Scanner(System.in));
             User user = auth.run();
             try {
@@ -33,14 +33,14 @@ public class App {
                     ConsoleManager.printError("Wrong data");
                 } catch (IncorrectScriptException e) {
                     ConsoleManager.printError("Bad script");
-                }catch (LogOutException e){
+                } catch (LogOutException e) {
                     throw new LogOutException();
                 }
             } catch (Disconnect | UnresolvedAddressException | IOException e) {
                 ConsoleManager.printError(e.getMessage());
-            }catch (LogOutException e){
-                sign=true;
+            } catch (LogOutException e) {
+                sign = true;
             }
-        }while (sign);
+        } while (sign);
     }
 }

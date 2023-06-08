@@ -11,7 +11,6 @@ import static config.ConfigData.CAPACITY_BUFFER;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.DatagramChannel;
 import java.nio.channels.SocketChannel;
 
 public class Client {
